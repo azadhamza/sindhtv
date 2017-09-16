@@ -1,0 +1,19 @@
+//
+//  PrefixHeader.pch
+//  SindhTV
+//
+//  Created by intellisense on 06/05/16.
+//  Copyright © 2016 intellisense. All rights reserved.
+#import <Availability.h>
+#ifndef PrefixHeader_pch
+
+#define PrefixHeader_pch
+//#define NSLog //
+#import "TSActivityIndicatorView.h"
+#import "UIImageView+WebCache.h"
+#import "AppDelegate.h"
+@import GoogleMobileAds;
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
