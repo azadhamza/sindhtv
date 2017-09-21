@@ -1,5 +1,5 @@
 <section class="content">
-<?php echo base_url(uri_string());?>
+
     <h1>News</h1>
 
 
