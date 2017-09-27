@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script>
+            var BASE_URL = "<?php echo base_url(); ?>";
+        </script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Sindh TV | Dashboard</title>
@@ -17,6 +20,8 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo asset_url('dist/css/skins/_all-skins.min.css'); ?>">
+        <link rel="stylesheet" href="<?php echo asset_url('filer/css/jquery.filer-dragdropbox-theme.css'); ?>">
+        <link rel="stylesheet" href="<?php echo asset_url('filer/css/jquery.filer.css'); ?>">
         <!-- Morris chart -->
         <link rel="stylesheet" href="<?php echo asset_url('bower_components/morris.js/morris.css'); ?>">
         <!-- jvectormap -->
@@ -289,5 +294,13 @@
         <script src="<?php echo asset_url('dist/js/pages/dashboard.js'); ?>"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="<?php echo asset_url('dist/js/demo.js'); ?>"></script>
+
+
+        <script src="<?php echo asset_url('js/custom.js'); ?>"></script>
+
+<!--        <script src="<?php // echo asset_url('filer/js/jquery.filer.js'); ?>"></script>
+        <script src="<?php // echo asset_url('filer/js/jquery.filer.min.js'); ?>"></script>-->
+
+
     </body>
 </html>

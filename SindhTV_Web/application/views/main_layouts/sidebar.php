@@ -48,6 +48,26 @@
                 ?>"><a href="/index.php/admin/news"><i class="fa fa-circle-o"></i>All News</a></li>
             </ul>
         </li>
+        <li class="<?php echo ($controller == 'videos') ? 'active' : ''; ?> treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Videos</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="<?php
+                if ($controller == 'videos' && $action == 'addnew') {
+                    echo 'active';
+                }
+                ?>"><a href="/index.php/admin/videos/addnew"><i class="fa fa-circle-o"></i>Add</a></li>
+                <li class="<?php
+                if ($controller == 'videos' && (empty($action) || $action == 'index' )) {
+                    echo 'active';
+                }
+                ?>"><a href="/index.php/admin/videos"><i class="fa fa-circle-o"></i>All Videos</a></li>
+            </ul>
+        </li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-files-o"></i>
