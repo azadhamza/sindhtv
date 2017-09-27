@@ -36,7 +36,7 @@ class News extends MY_Controller {
         $data = array();
         $this->load->library("pagination");
         $total_rows = $this->content->get_total_content_by_type($this->type);
-        
+
         $pagination_config = get_pagination_config($this->type . '/index', $total_rows, $this->config->item('pagination_limit'), 4);
 
         $this->pagination->initialize($pagination_config);
@@ -83,12 +83,12 @@ class News extends MY_Controller {
     public function update() {
 
         $serialize_data = array();
-        $serialize_data = $_POST['news']['data'];
+        $serialize_data = !empty($_POST['news']['data']) ? $_POST['news']['data'] : '';
         $data = array(
-            'title' => $_POST['news']['title'],
-            'start_date' => $_POST['news']['start_date'],
-            'end_date' => $_POST['news']['end_date'],
-            'description' => $_POST['news']['description'],
+            'title' => !empty($_POST['news']['title']) ? $_POST['news']['title'] : '',
+            'start_date' => !empty($_POST['news']['start_date']) ? $_POST['news']['start_date'] : '',
+            'end_date' => !empty($_POST['news']['end_date']) ? $_POST['news']['end_date'] : '',
+            'description' => !empty($_POST['news']['description']) ? $_POST['news']['description'] : '',
             'data' => serialize($serialize_data),
         );
 
@@ -109,13 +109,12 @@ class News extends MY_Controller {
 
     public function submit() {
         $serialize_data = array();
-        $serialize_data = $_POST['news']['data'];
-
+        $serialize_data = !empty($_POST['news']['data']) ? $_POST['news']['data'] : '';
         $data = array(
-            'title' => $_POST['news']['title'],
-            'start_date' => $_POST['news']['start_date'],
-            'end_date' => $_POST['news']['end_date'],
-            'description' => $_POST['news']['description'],
+            'title' => !empty($_POST['news']['title']) ? $_POST['news']['title'] : '',
+            'start_date' => !empty($_POST['news']['start_date']) ? $_POST['news']['start_date'] : '',
+            'end_date' => !empty($_POST['news']['end_date']) ? $_POST['news']['end_date'] : '',
+            'description' => !empty($_POST['news']['description']) ? $_POST['news']['description'] : '',
             'data' => serialize($serialize_data),
         );
 
@@ -133,7 +132,7 @@ class News extends MY_Controller {
         $flag = $this->content->delete_content($id, $status);
 //        $this->image->delete_content_images($id);
 //        if (empty($view)) {
-            redirect(site_url('admin/' . $this->type . '/index'));
+        redirect(site_url('admin/' . $this->type . '/index'));
 //        } else {
 //            redirect(site_url('admin/' . $this->type . '/view/' . $id));
 //        }

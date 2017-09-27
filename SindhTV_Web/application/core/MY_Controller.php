@@ -16,9 +16,10 @@ class MY_Controller extends CI_Controller {
         $files = $_FILES;
         $cpt = count($_FILES['userfile']['name']);
 
+
         $config['upload_path'] = $path;
         $config['allowed_types'] = '*';
-        $config['max_size'] = '512KB';
+        $config['max_size'] = '*';
         $config['max_width'] = '10024';
         $config['max_height'] = '10768';
         $this->upload->initialize($config);
@@ -36,12 +37,14 @@ class MY_Controller extends CI_Controller {
             $_FILES['userfile']['error'] = $files['userfile']['error'][$i];
             $_FILES['userfile']['size'] = $files['userfile']['size'][$i];
 
-
-
-            
+           
             //$this->load->library('upload', $config);
             if (!$this->upload->do_upload()) {
                 $this->uploadSuccess = false;
+                echo '<pre>';
+                print_r($this->upload->display_errors());
+                echo '</pre>';
+                exit;
                 $this->uploadError = array('error' => $this->upload->display_errors());
             } else {
                 $this->uploadSuccess = true;
@@ -59,8 +62,6 @@ class MY_Controller extends CI_Controller {
             );
         }
 
-        //$this->load->library('upload', $config);
-        //$this->upload->initialize($config);
 
 
         if ($this->uploadSuccess == false) {
@@ -106,8 +107,6 @@ class MY_Controller extends CI_Controller {
 
 
             //$this->load->library('upload', $config);
-            
-            
             //$this->upload->do_upload();
             if (!$this->upload->do_upload()) {
                 $this->uploadSuccess = false;
