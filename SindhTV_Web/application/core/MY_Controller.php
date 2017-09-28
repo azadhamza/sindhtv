@@ -41,10 +41,7 @@ class MY_Controller extends CI_Controller {
             //$this->load->library('upload', $config);
             if (!$this->upload->do_upload()) {
                 $this->uploadSuccess = false;
-                echo '<pre>';
-                print_r($this->upload->display_errors());
-                echo '</pre>';
-                exit;
+                
                 $this->uploadError = array('error' => $this->upload->display_errors());
             } else {
                 $this->uploadSuccess = true;

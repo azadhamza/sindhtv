@@ -1,6 +1,16 @@
 $(document).ready(function () {
 
-
+    jQuery('.video').on('change', function () {
+        var sel = jQuery(this).val();
+        if (sel == 'link') {
+            jQuery('.link-sec').show();
+            jQuery('.upload-sec').hide();
+        } else if (sel == 'upload') {
+            jQuery('.link-sec').hide();
+            jQuery('.upload-sec').show();
+        }
+    });
+    
     $(document).on('change', '#singleimage', function () {
         files = this.files;
         size = files[0].size;

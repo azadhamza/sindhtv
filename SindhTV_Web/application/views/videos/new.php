@@ -22,15 +22,26 @@
                                 <input type="text" class="form-control" name="videos[title]" placeholder="Enter ..." value="">
                             </div>
 
-                         
+
                             <div class="form-group">
                                 <label for="videos_description">Description</label>
                                 <textarea class="form-control" id="videos_description" name="videos[description]" rows="3" placeholder="Enter ..."></textarea>
                             </div>
+                            <div class="form-group ">
+                                <label>Video</label><br>
+                                <input type="radio" id="link" class="video" name="videos[data][type]" value="link" checked="checked"> <label for="link">Link</label>
+                                <b style="margin: 0px 10px;">OR</b>
+                                <input type="radio" id="video" class="video" name="videos[data][type]" value="upload"> <label for="video">Upload</label>
+                            </div>
+                            <div class="form-group link-sec">
+                                <label>Link</label>
+                                <input type="text" class="form-control" name="videos[data][link]" placeholder="Enter ..." value="">
+                            </div>
 
-                            <div class="form-group">
+
+                            <div class="form-group upload-sec" style="display: none">
+                                <label>Upload</label><br>
                                 <div style="background: #f7f8fa;padding: 50px;">
-
                                     <input type="file"  name="userfile[]" id="input2">
 
                                 </div>

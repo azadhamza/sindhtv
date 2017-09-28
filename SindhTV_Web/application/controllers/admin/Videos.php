@@ -84,6 +84,7 @@ class Videos extends MY_Controller {
 
         $serialize_data = array();
         $serialize_data = !empty($_POST['videos']['data']) ? $_POST['videos']['data'] : '';
+ 
         $data = array(
             'title' => !empty($_POST['videos']['title']) ? $_POST['videos']['title'] : '',
             'start_date' => !empty($_POST['videos']['start_date']) ? $_POST['videos']['start_date'] : '',

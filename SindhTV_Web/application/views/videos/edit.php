@@ -8,48 +8,52 @@ $data = unserialize($videos['data']);
         <div class="col-xs-12">
             <p class="lead">Video # <?php echo ucfirst($videos['content_id']); ?></p>
 
-                <div class="col-xs-6">
-                    <div class="table-responsive">
+            <div class="col-xs-6">
+                <div class="table-responsive">
 
-                        <div class="box box-primary">
+                    <div class="box box-primary">
 
-                            <!-- form start -->
-                            <form name="edit_videos" id="club_videos" action="<?php echo base_url(); ?>index.php/admin/videos/update" method="POST"  enctype="multipart/form-data">
-                                <input name="videos[is_submit]" id="is_submit" value="1" type="hidden" />
-                                <input name="videos[id]" id="uniqid" value="<?php echo $videos['content_id']; ?>" type="hidden" />
-                                <div class="box-body">
+                        <!-- form start -->
+                        <form name="edit_videos" id="club_videos" action="<?php echo base_url(); ?>index.php/admin/videos/update" method="POST"  enctype="multipart/form-data">
+                            <input name="videos[is_submit]" id="is_submit" value="1" type="hidden" />
+                            <input name="videos[id]" id="uniqid" value="<?php echo $videos['content_id']; ?>" type="hidden" />
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" class="form-control" name="videos[title]" placeholder="Enter ..." value="<?php echo $videos['title']; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="videos_description">Description</label>
+                                    <textarea class="form-control" id="videos_description" name="videos[description]" rows="3" placeholder="Enter ..."><?php echo $videos['description']; ?></textarea>
+                                </div>
+                                <div class="form-group ">
+                                    <label>Video</label><br>
+                                    <input type="radio" id="link" class="video" name="videos[data][type]" value="link" <?php echo ($data['type']=='link')?'checked="checked"':''; ?>> <label for="link">Link</label>
+                                    <b style="margin: 0px 10px;">OR</b>
+                                    <input type="radio" id="video" class="video" name="videos[data][type]" value="upload" <?php echo ($data['type']=='upload')?'checked="checked"':''; ?>> <label for="video">Upload</label>
+                                </div>
+ 
 
-
-
-                                    <div class="form-group">
-                                        <label>Title</label>
-                                        <input type="text" class="form-control" name="videos[title]" placeholder="Enter ..." value="<?php echo $videos['title']; ?>">
-                                    </div
-                                    <div class="form-group">
-                                        <label for="videos_description">Description</label>
-                                        <textarea class="form-control" id="videos_description" name="videos[description]" rows="3" placeholder="Enter ..."><?php echo $videos['description']; ?></textarea>
+                                <div class="form-group link-sec" <?php echo ($data['type']=='upload')?'style="display:none;"':''; ?>>
+                                    <label>Link</label>
+                                    <input type="text" class="form-control" name="videos[data][link]" placeholder="Enter ..." value="<?php echo $data['link']; ?>">
+                                </div>
+                                <div class="form-group upload-sec" <?php echo ($data['type']=='link')?'style="display:none;"':''; ?>>
+                                    <div style="background: #f7f8fa;padding: 50px;">
+                                        <input type="file"  name="userfile[]" id="input2">
                                     </div>
-                                
-
-                                    <div class="form-group">
-                                        <div style="background: #f7f8fa;padding: 50px;">
-
-                                            <input type="file"  name="userfile[]" id="input2">
-
-                                        </div>
-
-                                    </div><!-- /.box-body -->
-                                
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                            </form>
-                        </div>
-
+                                </div><!-- /.box-body -->
+                            </div>
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
 
-            <div class="col-md-6">
+                </div>
+            </div>
+
+            <div class="col-md-6" <?php echo ($data['type']=='link')?'style="display:none;"':''; ?>>
                 <div class="box box-primary">
                     <div class="box-header">
                         <h3 class="box-title">Uploaded Video</h3>
@@ -104,7 +108,7 @@ $data = unserialize($videos['data']);
                             <?php
                         } else {
                             ?>
-                            <p>No Images so far.</p>
+                            <p>No Video so far.</p>
                             <?php
                         }
                         ?>
@@ -114,7 +118,7 @@ $data = unserialize($videos['data']);
                 </div><!-- /.box -->
 
             </div>
-                    
+
         </div>
     </div>
 
