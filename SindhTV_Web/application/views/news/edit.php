@@ -63,7 +63,7 @@ $data = unserialize($news['data']);
 
                 </div>
             </div>
-
+            </div>
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-header">
