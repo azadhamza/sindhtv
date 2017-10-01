@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class View extends MY_Controller {
 
     /**
      * Index Page for this controller.
@@ -22,24 +22,18 @@ class Dashboard extends CI_Controller {
      */
     function __construct() {
         parent::__construct();
-        $this->load->model('channels', '', TRUE);
-        if (!$this->session->userdata('logged_in')) {
-            redirect(base_url());
-        }
+        $this->load->model('content', '', TRUE);
+        $this->load->model('image', '', TRUE);
     }
 
     public function index() {
-        $data = array();
-        $data['channels'] = $this->channels->get_all_channels();
-        $data = $content = $this->load->view('dashboard/index.php', $data, true);
-        $this->load->view('layout', array('content' => $content));
+        
     }
 
-    public function select($id) {
-        $data = array();
-        $data['channel'] = $this->channels->get_all_channel_by_id($id);
-        $this->session->set_userdata('current_channel', $data['channel']);
-        redirect(base_url() . "index.php/admin/dashboard");
+    public function news($id) {
+        $data['news'] = $this->content->get_content_data($id);
+        $data['images'] = $this->image->get_images_by_content_id($id);
+        $this->load->view('news/webview', $data);
     }
 
 }

@@ -26,27 +26,33 @@ class News extends MY_Controller {
         parent::__construct();
         $this->load->model('content', '', TRUE);
         $this->load->model('image', '', TRUE);
+        $this->load->model('news_category', '', TRUE);
 
         if (!$this->session->userdata('logged_in')) {
             redirect(base_url());
+        }
+        if (!$this->session->userdata('current_channel')) {
+            redirect(base_url('index.php/admin/dashboard'));
         }
     }
 
     public function index() {
         $data = array();
         $this->load->library("pagination");
-        $total_rows = $this->content->get_total_content_by_type($this->type);
+        $current_channel = ($this->session->userdata('current_channel')) ? $this->session->userdata('current_channel') : '';
 
+        $total_rows = $this->content->get_total_content_by_type($this->type, $current_channel['id']);
         $pagination_config = get_pagination_config($this->type . '/index', $total_rows, $this->config->item('pagination_limit'), 4);
-
         $this->pagination->initialize($pagination_config);
-
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
         $data["links"] = $this->pagination->create_links();
-
-        $news = $this->content->get_content_by_type($this->type, $page);
+        $news = $this->content->get_content_by_type($this->type, $page, $current_channel['id']);
         $data['news'] = $news;
+        $news_categories = $this->news_category->get_all();
+        foreach ($news_categories as $category) {
+            $data['news_category'][$category['id']] = $category['category'];
+        }
+
         $content = $this->load->view($this->type . '/tabular.php', $data, true);
         $this->load->view('layout', array('content' => $content));
     }
@@ -55,6 +61,10 @@ class News extends MY_Controller {
         $news = $this->content->get_content_by_id($this->type, $id);
         $data['news'] = $news[0];
         $images = $this->image->get_images_by_content_id($id);
+        $news_categories = $this->news_category->get_all();
+        foreach ($news_categories as $category) {
+            $data['news_category'][$category['id']] = $category['category'];
+        }
 
         foreach ($images as $image) {
             $data['news']['images'][] = $image['path'] . $image['name'];
@@ -69,7 +79,7 @@ class News extends MY_Controller {
         $news = $this->content->get_content_by_id($this->type, $id);
         $data['news'] = $news[0];
         $images = $this->image->get_images_by_content_id($id);
-
+        $data['news_category'] = $this->news_category->get_all();
         foreach ($images as $image) {
             $data['news']['images'][] = array(
                 'path' => $image['path'] . $image['name'],
@@ -103,18 +113,24 @@ class News extends MY_Controller {
     }
 
     public function addnew() {
-        $content = $this->load->view($this->type . '/new.php', $data = NULL, true);
+        $data = array();
+        $data['news_category'] = $this->news_category->get_all();
+        $content = $this->load->view($this->type . '/new.php', $data, true);
+
         $this->load->view('layout', array('content' => $content));
     }
 
     public function submit() {
         $serialize_data = array();
         $serialize_data = !empty($_POST['news']['data']) ? $_POST['news']['data'] : '';
+        $current_channel = ($this->session->userdata('current_channel')) ? $this->session->userdata('current_channel') : '';
+
         $data = array(
             'title' => !empty($_POST['news']['title']) ? $_POST['news']['title'] : '',
             'start_date' => !empty($_POST['news']['start_date']) ? $_POST['news']['start_date'] : '',
             'end_date' => !empty($_POST['news']['end_date']) ? $_POST['news']['end_date'] : '',
             'description' => !empty($_POST['news']['description']) ? $_POST['news']['description'] : '',
+            'channel_id' => !empty($current_channel['id']) ? $current_channel['id'] : '',
             'data' => serialize($serialize_data),
         );
 
@@ -140,8 +156,12 @@ class News extends MY_Controller {
 
     public function delete_image($id, $content_id) {
         $this->image->deactivate_image($id);
-
         redirect(site_url('admin/' . $this->type . '/edit/' . $content_id));
+    }
+
+    public function status($id, $status = 0) {
+        $this->content->change_status($id, $status);
+        redirect(site_url('admin/' . $this->type));
     }
 
 }

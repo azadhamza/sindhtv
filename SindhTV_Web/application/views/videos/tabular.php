@@ -21,6 +21,7 @@
                         <tr>
                             <th>#</th>
                             <th>Title</th>
+                            <th>Category</th>
                             <th>Description</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -32,12 +33,15 @@
                             ?>
                             <tr>
                                 <td><?php echo $videos['content_id']; ?></td>
-                                <td><?php echo $videos['title']; ?></td>
+                                <td><?php echo $videos['title']; ?></td>                                
+                                <td><?php echo $video_category[$data['category']]; ?></td>
                                 <td><?php echo(strlen($videos['description']) > 100) ? substr($videos['description'], 0, 97) . '...' : $videos['description']; ?></td>
                                 <td>
+                                    <a href="/index.php/admin/videos/status/<?php echo $videos['content_id'] . '/' . !$videos['is_approved']; ?>"/>
                                     <?php
-                                    echo ($videos['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                    echo ($videos['is_approved'] == 1) ? "<span class='label label-success'>Approved</span>" : "<span class='label label-danger'>Rejected</span>";
                                     ?>
+                                    </a>
                                 </td>
 
                                 <td>

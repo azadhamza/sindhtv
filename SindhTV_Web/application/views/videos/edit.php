@@ -23,22 +23,37 @@ $data = unserialize($videos['data']);
                                     <input type="text" class="form-control" name="videos[title]" placeholder="Enter ..." value="<?php echo $videos['title']; ?>">
                                 </div>
                                 <div class="form-group">
+                                    <label>Category</label>
+                                    <select name="videos[data][category]" class="form-control">
+                                        <option value="">Choose a Category:</option>
+                                        <?php foreach ($video_category as $value) { ?>
+                                            <option value="<?php echo $value['id']; ?>"
+                                            <?php
+                                            if ($data['category'] == $value['id']) {
+                                                echo 'selected="selected"';
+                                            }
+                                            ?>
+                                                    ><?php echo $value['category']; ?></option>                                  
+                                                <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="videos_description">Description</label>
                                     <textarea class="form-control" id="videos_description" name="videos[description]" rows="3" placeholder="Enter ..."><?php echo $videos['description']; ?></textarea>
                                 </div>
                                 <div class="form-group ">
                                     <label>Video</label><br>
-                                    <input type="radio" id="link" class="video" name="videos[data][type]" value="link" <?php echo ($data['type']=='link')?'checked="checked"':''; ?>> <label for="link">Link</label>
+                                    <input type="radio" id="link" class="video" name="videos[data][type]" value="link" <?php echo ($data['type'] == 'link') ? 'checked="checked"' : ''; ?>> <label for="link">Link</label>
                                     <b style="margin: 0px 10px;">OR</b>
-                                    <input type="radio" id="video" class="video" name="videos[data][type]" value="upload" <?php echo ($data['type']=='upload')?'checked="checked"':''; ?>> <label for="video">Upload</label>
+                                    <input type="radio" id="video" class="video" name="videos[data][type]" value="upload" <?php echo ($data['type'] == 'upload') ? 'checked="checked"' : ''; ?>> <label for="video">Upload</label>
                                 </div>
- 
 
-                                <div class="form-group link-sec" <?php echo ($data['type']=='upload')?'style="display:none;"':''; ?>>
+
+                                <div class="form-group link-sec" <?php echo ($data['type'] == 'upload') ? 'style="display:none;"' : ''; ?>>
                                     <label>Link</label>
                                     <input type="text" class="form-control" name="videos[data][link]" placeholder="Enter ..." value="<?php echo $data['link']; ?>">
                                 </div>
-                                <div class="form-group upload-sec" <?php echo ($data['type']=='link')?'style="display:none;"':''; ?>>
+                                <div class="form-group upload-sec" <?php echo ($data['type'] == 'link') ? 'style="display:none;"' : ''; ?>>
                                     <div style="background: #f7f8fa;padding: 50px;">
                                         <input type="file"  name="userfile[]" id="input2">
                                     </div>
@@ -53,7 +68,7 @@ $data = unserialize($videos['data']);
                 </div>
             </div>
 
-            <div class="col-md-6" <?php echo ($data['type']=='link')?'style="display:none;"':''; ?>>
+            <div class="col-md-6" <?php echo ($data['type'] == 'link') ? 'style="display:none;"' : ''; ?>>
                 <div class="box box-primary">
                     <div class="box-header">
                         <h3 class="box-title">Uploaded Video</h3>

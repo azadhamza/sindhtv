@@ -24,8 +24,15 @@ $data = unserialize($videos['data']);
                                 <th>Title:</th>
                                 <td><?php echo $videos['title']; ?></td>
                             </tr>
+                            <tr>
+                                <th>Category:</th>
+                                <td><?php echo $video_category[$data['category']]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td><?php echo $videos['description']; ?></td>
+                            </tr>
 
-                           
 
                         </tbody></table>
 

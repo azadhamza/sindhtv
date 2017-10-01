@@ -21,7 +21,16 @@
                                 <label>Title</label>
                                 <input type="text" class="form-control" name="videos[title]" placeholder="Enter ..." value="">
                             </div>
-
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select name="videos[data][category]" class="form-control">
+                                    <option value="">Choose a Category:</option>
+                                    <?php
+                                    foreach ($video_category as $value) { ?>
+                                        <option value="<?php echo $value['id']; ?>"><?php echo $value['category']; ?></option>                                  
+                                    <?php } ?>
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <label for="videos_description">Description</label>
