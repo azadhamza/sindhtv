@@ -138,7 +138,7 @@ class News extends MY_Controller {
         $image_data = $this->uploadImageFile($news_id, $this->type);
 
         if ($this->uploadSuccess) {
-            $this->image->add_images($image_data);
+            $this->image->add_images($image_data, TRUE, $news_id);
         }
 
         redirect(site_url('admin/' . $this->type . '/view/' . $news_id));

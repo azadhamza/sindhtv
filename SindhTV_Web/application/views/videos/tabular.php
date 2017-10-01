@@ -23,6 +23,7 @@
                             <th>Title</th>
                             <th>Category</th>
                             <th>Description</th>
+                            <th>Video Link</th>
                             <th>Status</th>
                             <th>Action</th>
 
@@ -30,12 +31,19 @@
                         <?php
                         foreach ($videos as $videos) {
                             $data = unserialize($videos['data']);
+                            $link = '';
+                            if ($data['type'] == 'link') {
+                                $link = $data['link'];
+                            } elseif ($data['type'] == 'upload') {
+                                $link = $videos['image'][0]['path'] . $videos['image'][0]['name'];
+                            }
                             ?>
                             <tr>
                                 <td><?php echo $videos['content_id']; ?></td>
                                 <td><?php echo $videos['title']; ?></td>                                
                                 <td><?php echo $video_category[$data['category']]; ?></td>
                                 <td><?php echo(strlen($videos['description']) > 100) ? substr($videos['description'], 0, 97) . '...' : $videos['description']; ?></td>
+                                <td><a href="<?php echo$link; ?>" target="_blank"><i class="fa fa-television"></i></a></td>
                                 <td>
                                     <a href="/index.php/admin/videos/status/<?php echo $videos['content_id'] . '/' . !$videos['is_approved']; ?>"/>
                                     <?php

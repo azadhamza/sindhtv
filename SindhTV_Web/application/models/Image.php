@@ -6,8 +6,13 @@ Class Image extends CI_Model {
         return $this->db->count_all('image');
     }
 
-    function add_images($data) {
+    function add_images($data, $replaced = FALSE, $id = NULL) {
         foreach ($data as $image) {
+            if ($replaced) {
+                $deactive = array('is_active' => 0);
+                $this->db->where('content_id', $id);
+                $this->db->update('image', $deactive);
+            }
             $this->db->insert('image', $image);
         }
     }

@@ -27,7 +27,7 @@ class Videos extends MY_Controller {
         $this->load->model('content', '', TRUE);
         $this->load->model('image', '', TRUE);
         $this->load->model('video_category', '', TRUE);
-        
+
         if (!$this->session->userdata('logged_in')) {
             redirect(base_url());
         }
@@ -52,7 +52,12 @@ class Videos extends MY_Controller {
         $data["links"] = $this->pagination->create_links();
 
         $videos = $this->content->get_content_by_type($this->type, $page, $current_channel['id']);
-        $data['videos'] = $videos;
+
+        foreach ($videos as $value) {
+            $data['videos'][$value['content_id']] = $value;
+            $data['videos'][$value['content_id']]['image'] = $this->image->get_images_by_content_id($value['content_id']);
+        }
+
         $video_categories = $this->video_category->get_all();
         foreach ($video_categories as $category) {
             $data['video_category'][$category['id']] = $category['category'];
@@ -94,7 +99,7 @@ class Videos extends MY_Controller {
     }
 
     public function update() {
-
+        
         $serialize_data = array();
         $serialize_data = !empty($_POST['videos']['data']) ? $_POST['videos']['data'] : '';
 
@@ -109,8 +114,10 @@ class Videos extends MY_Controller {
         $videos_id = $this->content->update_content_by_id($_POST['videos']['id'], $data);
         $image_data = $this->uploadImageFile($videos_id, $this->type);
 
+
+
         if ($this->uploadSuccess) {
-            $this->image->add_images($image_data);
+            $this->image->add_images($image_data, TRUE, $videos_id);
         }
 
         redirect(site_url('admin/' . $this->type . '/edit/' . $videos_id));
@@ -139,7 +146,7 @@ class Videos extends MY_Controller {
         $image_data = $this->uploadImageFile($videos_id, $this->type);
 
         if ($this->uploadSuccess) {
-            $this->image->add_images($image_data);
+            $this->image->add_images($image_data, TRUE, $videos_id);
         }
 
         redirect(site_url('admin/' . $this->type . '/view/' . $videos_id));
