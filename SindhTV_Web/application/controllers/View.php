@@ -36,4 +36,9 @@ class View extends MY_Controller {
         $this->load->view('news/webview', $data);
     }
 
+    public function about() {
+        $data = array();
+        $this->load->view('about', $data);
+    }
+
 }
