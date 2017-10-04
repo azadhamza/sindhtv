@@ -329,14 +329,6 @@
                 {
                     urlString=[[epaperArr objectAtIndex:0] valueForKey:@"webview_url"];
                     
-                    //http://www.dailyjeejal.com/epaper/
-                    
-                    //urlString=[NSString stringWithFormat:@"http://www.dailyjeejal.com/epaper/"];
-                    //urlString=[NSString stringWithFormat:@"http://stackoverflow.com/questions/5878832/how-to-reload-a-uiwebview"];
-                    
-                    
-                    
-                    
                     if ([urlString isEqualToString:@""])
                     {
                         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"Nothing to show here" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
