@@ -86,12 +86,12 @@ public class MainActivity extends AppCompatActivity {
     private int selectedPosition;
     // private TextView textTitle;
     BroadcastReceiver mRegistrationBroadcastReceiver;
-    private ArrayList<String> arrMenuId = new ArrayList<String>();
+    private ArrayList<Integer> arrMenuId = new ArrayList<Integer>();
     private ArrayList<String> arrMenuImage = new ArrayList<String>();
     private ArrayList<String> arrMenuName = new ArrayList<String>();
     private ArrayList<String> arrMenuNameTabs = new ArrayList<String>();
     private ArrayList<String> arrMenuCheckMenuType = new ArrayList<String>();
-    private ArrayList<String> arrMenuIdTabs = new ArrayList<String>();
+    private ArrayList<Integer> arrMenuIdTabs = new ArrayList<Integer>();
 
     //SharedPreferences shp;
     Boolean isInternetPresent = false;
@@ -323,11 +323,11 @@ public class MainActivity extends AppCompatActivity {
                                     int position, long id) {
                 selectedPosition = position;
 
-                if (arrMenuId.get(position).equals("8") || arrMenuId.get(position).equals("9")
-                        || arrMenuId.get(position).equals("12") || arrMenuId.get(position).equals("13")
-                        || arrMenuId.get(position).equals("15") || arrMenuId.get(position).equals("16")) {
+                if (arrMenuId.get(position).equals(8) || arrMenuId.get(position).equals(9)
+                        || arrMenuId.get(position).equals(12) || arrMenuId.get(position).equals(13)
+                        || arrMenuId.get(position).equals(15) || arrMenuId.get(position).equals(16)) {
 
-                    if (arrMenuId.get(position).equals("8")) {
+                    if (arrMenuId.get(position).equals(8)) {
 
                         mDrawerLayout.closeDrawers();
 
@@ -409,26 +409,26 @@ public class MainActivity extends AppCompatActivity {
                         shareIntent.setType("image/*");
                         startActivity(Intent.createChooser(shareIntent,"Share with"));
 
-                    } else if (arrMenuId.get(position).equals("12")) {
+                    } else if (arrMenuId.get(position).equals(12)) {
 
 
                         mDrawerLayout.closeDrawers();
 
                         startActivity(new Intent(MainActivity.this, com.it.admin.sindhtv.AboutActivity.class));
 
-                    } else if (arrMenuId.get(position).equals("15")) {
+                    } else if (arrMenuId.get(position).equals(15)) {
 
                         mDrawerLayout.closeDrawers();
 
                         startActivity(new Intent(MainActivity.this, com.it.admin.sindhtv.ContactUsActivity.class));
 
-                    } else if (arrMenuId.get(position).equals("16")) {
+                    } else if (arrMenuId.get(position).equals(16)) {
 
                         mDrawerLayout.closeDrawers();
 
                         startActivity(new Intent(MainActivity.this, com.it.admin.sindhtv.ProgramProfileActivity.class));
 
-                    } else if (arrMenuId.get(position).equals("13")) {
+                    } else if (arrMenuId.get(position).equals(13)) {
 
                         mDrawerLayout.closeDrawers();
 
@@ -503,30 +503,30 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < arrMenuIdTabs.size(); i++) {
 
                 String check = arrMenuCheckMenuType.get(position);
-                String menuId = arrMenuIdTabs.get(position);
+                Integer menuId = arrMenuIdTabs.get(position);
 
                 //   if (check.equals("1")) {
 
 
                 // } else {
 
-                if (menuId.equals("1")) {
+                if (menuId.equals(1)) {
 
                     return new LiveFragment();
 
-                } else if (menuId.equals("10")) {
+                } else if (menuId.equals(10)) {
 
                     return new VideosFragment();
 
-                } else if (menuId.equals("7")) {
+                } else if (menuId.equals(7)) {
 
                     return new ArticleFragment();
 
-                } else if (menuId.equals("3")) {
+                } else if (menuId.equals(3)) {
 
                     return new HeadlineFragments();
 
-                } else if (menuId.equals("11")) {
+                } else if (menuId.equals(11)) {
 
                     return new EPaperFragent();
 
@@ -683,7 +683,7 @@ public class MainActivity extends AppCompatActivity {
 
                     JSONObject jsonobject2 = jsonArrayMian.getJSONObject(j);
 
-                    String menu_id = jsonobject2.getString("menu_id");
+                    Integer menu_id = jsonobject2.getInt("menu_id");
                     String menu_icon = jsonobject2.getString("menu_icon");
                     String menu_name = jsonobject2.getString("menu_name");
                     String is_listmenu = jsonobject2.getString("is_listmenu");
@@ -716,7 +716,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < arrMenuId.size(); i++) {
 
                 String check = arrMenuCheckMenuType.get(i);
-                String menuId = arrMenuId.get(i);
+                Integer menuId = arrMenuId.get(i);
 
                 if (check.equals("1")) {
 
