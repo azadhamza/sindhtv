@@ -1,5 +1,7 @@
 package com.it.utility;
 
+import android.util.Log;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -17,6 +19,8 @@ import java.util.List;
 
 public class ServiceHandler {
 
+	private static final String TAG = ServiceHandler.class.getSimpleName();
+
 	static String response = null;
 	public final static int GET = 1;
 	public final static int POST = 2;
@@ -29,8 +33,10 @@ public class ServiceHandler {
 		return this.makeServiceCall(url, method, null);
 	}
 
-	public String makeServiceCall(String url, int method,
-			List<NameValuePair> params) {
+	public String makeServiceCall(String url, int method, List<NameValuePair> params) {
+
+		Log.d(TAG, "Request --> " + url);
+
 		try {
 			// http client
 			DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -69,6 +75,9 @@ public class ServiceHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		Log.d(TAG, "Response --> " + url);
+		Log.d(TAG, "Response --> " + response);
 
 		return response;
 
