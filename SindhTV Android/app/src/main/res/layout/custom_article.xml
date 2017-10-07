@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="205dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/rrrArticle"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="2dp">
+
+            <ImageView
+                android:id="@+id/imageVideoGalleryArticle"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/imageIconVideo1Article"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/video_icon"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textTimeGalleryArticle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="2dp"
+                android:background="#000000"
+                android:padding="1dp"
+                android:text="Live"
+                android:textColor="#ffffff"
+                android:textSize="10dp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/lllArticle"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/trans"
+                android:gravity="center_horizontal"
+                android:padding="4dp">
+
+                <TextView
+                    android:id="@+id/textVideoGalleryArticle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="Very "
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#ffffff"
+                    android:textSize="13dp" />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

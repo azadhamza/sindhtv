@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutUpload"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ScrollView android:id="@+id/scrollUpload"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editNameUpload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit"
+                android:hint="Enter Name"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/editEmailUpload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/custom_edit"
+                android:hint="Enter Email"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/editPasswordUpload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:inputType="number"
+                android:background="@drawable/custom_edit"
+                android:hint="Phone Number"
+                android:padding="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <Button
+                    android:id="@+id/btnSelectTypeFeedback"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="@drawable/custom_edit"
+                    android:drawableRight="@drawable/down"
+                    android:padding="10dp"
+                    android:text="Select file to upload" />
+
+
+               <!-- <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_relativelayout">
+
+                    <ImageView
+                        android:id="@+id/imageThumbnailRecord"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/record"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/imageThumbnailImage"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/image"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/imageThumbnailVideo"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/video"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/imageThumbnailVideoIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/videoicon"
+                        android:visibility="gone" />
+
+                </RelativeLayout>-->
+
+            </LinearLayout>
+
+
+            <TextView android:id="@+id/textPath"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#ffffff"
+                android:padding="5dp"
+                android:background="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"/>
+
+
+            <EditText
+                android:id="@+id/editFeedbackUpload"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/custom_edit"
+                android:gravity="start"
+                android:hint="Enter Feedback"
+                android:padding="5dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBarVideoUplaod"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:progressDrawable="@drawable/progressbar2"
+                />
+
+            <TextView android:id="@+id/textLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                      android:visibility="gone"
+                      android:textColor="#ffffff"
+                      android:layout_gravity="center_horizontal"
+                android:text="Uploading..."/>
+
+
+            <Button
+                android:id="@+id/btnSubmitTypeFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="#3f51b5"
+                android:text="SUBMIT"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+                  android:layout_below="@+id/scrollUpload"
+        android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+        android:id="@+id/linearAdUpload"></LinearLayout>
+
+
+</RelativeLayout>
