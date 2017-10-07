@@ -107,7 +107,7 @@ public class AllChannels extends AppCompatActivity {
         new GetChannels().execute();
         GlobalArraylist.arrChannels.clear();
 
-        GlobalArraylist.arrChannels.add(new GetterSetter("30", "Sindh TV", R.drawable.sindhtv));
+        GlobalArraylist.arrChannels.add(new GetterSetter("3", "Sindh TV", R.drawable.sindhtv));
         GlobalArraylist.arrChannels.add(new GetterSetter("29", "Sindh TV News", R.drawable.sindhtv_news));
         GlobalArraylist.arrChannels.add(new GetterSetter("58", "Daily Jeejal", R.drawable.jeejal));
 

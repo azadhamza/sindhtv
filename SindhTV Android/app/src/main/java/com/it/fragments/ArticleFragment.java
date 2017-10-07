@@ -197,7 +197,7 @@ public class ArticleFragment  extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
 
-            String url = WebServicesUrls.BASE_URL + WebServicesUrls.GET_VIDEOCHANNELS + channelID + "/7?appid=" + appId;
+            String url = WebServicesUrls.BASE_URL + WebServicesUrls.GET_NEWS + channelID;
 
             ServiceHandler service = new ServiceHandler();
 

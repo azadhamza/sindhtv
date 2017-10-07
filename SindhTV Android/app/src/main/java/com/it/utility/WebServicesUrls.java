@@ -9,6 +9,7 @@ public class WebServicesUrls {
 
     public static String GET_CHANNELS = "config/";
     public static String GET_TABS = "menu_config/";
+    public static String GET_NEWS = "news/";
 
 
     public static String GET_LIVES= "packagelist/";
