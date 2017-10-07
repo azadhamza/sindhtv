@@ -5,10 +5,12 @@ package com.it.utility;
  */
 public class WebServicesUrls {
 
-    public static String BASE_URL = "http://poovee.net/webservices/";
+    public static String BASE_URL = "http://sindhtv.tv/index.php/api/";
 
-    public static String GET_CHANNELS = "package/2";
-    public static String GET_TABS = "packagemenu/2/";
+    public static String GET_CHANNELS = "config/";
+    public static String GET_TABS = "menu_config/";
+
+
     public static String GET_LIVES= "packagelist/";
     public static String GET_VIDEOCHANNELS = "packagelist/";
     public static String POST_UPLOAD = "appfeedback/2/";
