@@ -10,6 +10,10 @@ public class WebServicesUrls {
     public static String GET_CHANNELS = "config/";
     public static String GET_TABS = "menu_config/";
     public static String GET_NEWS = "news/";
+    public static String GET_HEADLINES = "headlines/";
+    public static String GET_VIDEO_CATEGORY = "video_categories/";
+    public static String GET_VIDEO = "category_video/";
+
 
 
     public static String GET_LIVES= "packagelist/";

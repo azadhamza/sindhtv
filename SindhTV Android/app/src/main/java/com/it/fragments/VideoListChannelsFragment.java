@@ -33,6 +33,7 @@ import com.it.admin.sindhtv.R;
 import com.it.utility.GetterSetter;
 import com.it.utility.GlobalArraylist;
 import com.it.utility.ServiceHandler;
+import com.it.utility.WebServicesUrls;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -181,7 +182,7 @@ public class VideoListChannelsFragment extends Fragment {
 		@Override
 		protected Void doInBackground(Void... params) {
 
-			String url = "http://poovee.net/webservices/packagelist/"+channelID+"/"+videoChnnelClicked+"?appid="+appId;
+			String url = WebServicesUrls.BASE_URL + WebServicesUrls.GET_VIDEO + videoChnnelClicked + "/" + channelID;
 
 			ServiceHandler service = new ServiceHandler();
 

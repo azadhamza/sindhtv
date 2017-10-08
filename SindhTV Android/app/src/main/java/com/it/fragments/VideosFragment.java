@@ -163,7 +163,7 @@ public class VideosFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
 
-            String url = WebServicesUrls.BASE_URL + WebServicesUrls.GET_VIDEOCHANNELS + channelID + "/10?appid=" + appId;
+            String url = WebServicesUrls.BASE_URL + WebServicesUrls.GET_VIDEO_CATEGORY + channelID;
 
             ServiceHandler service = new ServiceHandler();
 
