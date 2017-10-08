@@ -1,5 +1,20 @@
 $(document).ready(function () {
 
+    jQuery('.episode_date').on('change', function () {
+        var sel = jQuery(this).val();
+        datepicker_on_change(sel);
+
+    });
+    function datepicker_on_change(sel) {
+        if (sel == "episode") {
+            $(".datepicker").datepicker("destroy");
+        } else if (sel == "date") {
+            jQuery(".datepicker").datepicker("enable");
+        }
+    }
+    
+    datepicker_on_change(jQuery(".episode_date:checked").val());
+
     jQuery('.video').on('change', function () {
         var sel = jQuery(this).val();
         if (sel == 'link') {
@@ -10,7 +25,7 @@ $(document).ready(function () {
             jQuery('.upload-sec').show();
         }
     });
-    
+
     $(document).on('change', '#singleimage', function () {
         files = this.files;
         size = files[0].size;

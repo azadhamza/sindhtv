@@ -20,7 +20,23 @@ $data = unserialize($videos['data']);
                             <div class="box-body">
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input type="text" class="form-control" name="videos[title]" placeholder="Enter ..." value="<?php echo $videos['title']; ?>">
+                                    <input type="text" class="form-control" autocomplete="off" name="videos[title]" list="videotitle" placeholder="Enter ..." value="<?php echo $videos['title']; ?>">
+                                    <datalist id="videotitle">
+                                        <?php foreach ($titles as $value) { ?>
+                                            <option value="<?php echo $value['title']; ?>">                                        
+                                            <?php } ?>
+                                    </datalist>
+                                </div>
+                                <div class="form-group">
+                                    <!--<label>Episode/Date</label>-->
+                                    <input type="radio" id="episode" class="episode_date" name="videos[data][sub_category]" value="episode" <?php echo ($data['sub_category'] == 'episode') ? 'checked="checked"' : ''; ?>> <label for="episode">Episode</label>
+                                    <b style="margin: 0px 10px;">OR</b>
+                                    <input type="radio" id="date" class="episode_date" name="videos[data][sub_category]" value="date" <?php echo ($data['sub_category'] == 'date') ? 'checked="checked"' : ''; ?>> <label for="date">Date</label>
+
+
+                                    <span class="fa fa-calendar open-datetimepicker"></span>
+                                    <input type="text" class="form-control datepicker"  name="videos[detail_description]"  autocomplete="off" placeholder="Enter ..." value="<?php echo $videos['detail_description']; ?>">
+
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>

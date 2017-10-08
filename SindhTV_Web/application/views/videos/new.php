@@ -19,14 +19,29 @@
 
                             <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" class="form-control" name="videos[title]" placeholder="Enter ..." value="">
+                                <input type="text" class="form-control" name="videos[title]"  autocomplete="off" list="videotitle" placeholder="Enter ..." value="">
+                                <datalist id="videotitle">
+                                    <?php foreach ($titles as $value) { ?>
+                                        <option value="<?php echo $value['title']; ?>">                                        
+                                        <?php } ?>
+                                </datalist>
                             </div>
+
+                            <div class="form-group">
+                                <!--<label>Episode/Date</label>-->
+                                <input type="radio" id="episode" class="episode_date" name="videos[data][sub_category]" value="episode" checked="checked"> <label for="episode">Episode</label>
+                                <b style="margin: 0px 10px;">OR</b>
+                                <input type="radio" id="date" class="episode_date" name="videos[data][sub_category]" value="date"> <label for="date">Date</label>
+
+
+                                <input type="text" class="form-control datepicker"  name="videos[detail_description]"  autocomplete="off" placeholder="Enter ..." value="">
+                            </div>
+
                             <div class="form-group">
                                 <label>Category</label>
                                 <select name="videos[data][category]" class="form-control">
                                     <option value="">Choose a Category:</option>
-                                    <?php
-                                    foreach ($video_category as $value) { ?>
+                                    <?php foreach ($video_category as $value) { ?>
                                         <option value="<?php echo $value['id']; ?>"><?php echo $value['category']; ?></option>                                  
                                     <?php } ?>
                                 </select>

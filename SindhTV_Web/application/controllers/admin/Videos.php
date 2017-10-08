@@ -84,6 +84,8 @@ class Videos extends MY_Controller {
     }
 
     public function edit($id) {
+        $current_channel = ($this->session->userdata('current_channel')) ? $this->session->userdata('current_channel') : '';
+        $data['titles'] = $this->content->get_all_titles($this->type, $current_channel['id']);
         $videos = $this->content->get_content_by_id($this->type, $id);
         $data['videos'] = $videos[0];
         $images = $this->image->get_images_by_content_id($id);
@@ -99,7 +101,7 @@ class Videos extends MY_Controller {
     }
 
     public function update() {
-        
+
         $serialize_data = array();
         $serialize_data = !empty($_POST['videos']['data']) ? $_POST['videos']['data'] : '';
 
@@ -108,6 +110,7 @@ class Videos extends MY_Controller {
             'start_date' => !empty($_POST['videos']['start_date']) ? $_POST['videos']['start_date'] : '',
             'end_date' => !empty($_POST['videos']['end_date']) ? $_POST['videos']['end_date'] : '',
             'description' => !empty($_POST['videos']['description']) ? $_POST['videos']['description'] : '',
+            'detail_description' => !empty($_POST['videos']['detail_description']) ? $_POST['videos']['detail_description'] : '',
             'data' => serialize($serialize_data),
         );
 
@@ -124,6 +127,8 @@ class Videos extends MY_Controller {
     }
 
     public function addnew() {
+        $current_channel = ($this->session->userdata('current_channel')) ? $this->session->userdata('current_channel') : '';
+        $data['titles'] = $this->content->get_all_titles($this->type, $current_channel['id']);
         $data['video_category'] = $this->video_category->get_all();
         $content = $this->load->view($this->type . '/new.php', $data, true);
         $this->load->view('layout', array('content' => $content));
@@ -139,6 +144,7 @@ class Videos extends MY_Controller {
             'end_date' => !empty($_POST['videos']['end_date']) ? $_POST['videos']['end_date'] : '',
             'description' => !empty($_POST['videos']['description']) ? $_POST['videos']['description'] : '',
             'channel_id' => !empty($current_channel['id']) ? $current_channel['id'] : '',
+            'detail_description' => !empty($_POST['videos']['detail_description']) ? $_POST['videos']['detail_description'] : '',
             'data' => serialize($serialize_data),
         );
 

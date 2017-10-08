@@ -11,6 +11,14 @@ Class Video_category extends CI_Model {
         return $result;
     }
 
+    public function get_all_by_channel_id($channel_id) {
+        $sql = "select * from video_category where channel_id=" . $channel_id;
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        $query->free_result();
+        return $result;
+    }
+
 }
 
 ?>

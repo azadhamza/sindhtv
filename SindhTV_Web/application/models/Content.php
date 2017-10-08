@@ -136,7 +136,51 @@ Class Content extends CI_Model {
         $this->db->where('content_id', $id);
         $this->db->update('content', array('is_approved' => $status));
     }
-    
+
+    public function get_all_titles($type, $channel_id) {
+        $sql = "SELECT title FROM content WHERE channel_id = $channel_id AND content_type_id =
+                (
+                        SELECT content_type_id FROM content_type
+                        WHERE content = '$type'
+                )";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        $query->free_result();
+        return $result;
+    }
+
+    public function get_all_news($channel_id) {
+        $sql = "SELECT * FROM content WHERE channel_id = $channel_id AND modified_time  >= DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        $query->free_result();
+        if (!empty($result)) {
+            foreach ($result as $value) {
+                $this->db->where('is_active', 1);
+                $query = $this->db->get_where('image', array('content_id' => $value['content_id']));
+                $image = $query->result_array();
+                $query->free_result();
+
+                $ser_data = unserialize($value['data']);
+                $news[] = array(
+                    'content_id' => $value['content_id'],
+                    'title' => $value['title'],
+                    'modified_time' => $value['modified_time'],
+                    'category' => !empty($ser_data['category']) ? $ser_data['category'] : '',
+                    'description' => $value['description'],
+                    'data' => unserialize($value['data']),
+                    'image' => !empty($image) ? $image[0]['path'] . $image[0]['name'] : ''
+                );
+            }
+            uasort($news, array($this, 'cmp'));
+            return $news;
+        }
+        return $result;
+    }
+
+    private static function cmp($a, $b) {
+        return $a['category'] > $b['category'] ? 1 : -1;
+    }
 
 }
 
