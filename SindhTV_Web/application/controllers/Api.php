@@ -27,6 +27,7 @@ class Api extends REST_Controller {
         $this->load->model('image', '', TRUE);
         $this->load->model('channels', '', TRUE);
         $this->load->model('news_category', '', TRUE);
+        $this->load->model('stvsettings', '', TRUE);
         $this->load->model('video_category', '', TRUE);
     }
 
@@ -80,6 +81,38 @@ class Api extends REST_Controller {
         $data["menubg"] = "#000000";
         $data ["type"] = 1;
         $this->response($data, 200);
+    }
+
+    public function category_video_get($category_id, $channel_id) {
+        $videos = $this->content->get_video_by_category($category_id, $channel_id);
+        $title = "";
+        foreach ($videos as $video) {
+
+
+            if ($title = $video['title'] != $title)
+                $data['items'][$video['title']] = [
+                    "schedule_id" => $video['title'] . "-" . $video['id'],
+                    "schedule_name" => $video['title'],
+                ];
+
+
+            $title = $video['title'];
+            $data['items'][$video['title']]['videos'][] = array(
+                "adsviews" => 0,
+                "duration" => "",
+                "thumb" => "",
+                "time-ago" => $this->time_elapsed_string($video['modified_time']),
+                "title" => $video['detail_description'],
+                "videoid" => $video['content_id'],
+                "views" => 0,
+                "webview_url" => !empty($video['name']) ? base_url() . $video['path'] . $video['name'] : '',
+            );
+        }
+
+        foreach ($data['items'] as $val) {
+            $data_final['items'][] = $val;
+        }
+        $this->response($data_final, 200);
     }
 
     public function menu_config_get() {
@@ -195,6 +228,21 @@ class Api extends REST_Controller {
                 $count++;
             }
         }
+        $this->response($data, 200);
+    }
+
+    public function live_stream_get($channel_id) {
+        $live_stream_link = $this->stvsettings->get_data('live_stream_link', $channel_id);
+        $live_stream_thumb = $this->stvsettings->get_data('live_stream_thumb', $channel_id);
+
+        $data['items'] = array(
+            "audio_url" => "",
+            "channel_id" => $channel_id,
+            "channel_thumb" => $live_stream_thumb['value'],
+            "videoid" => 1,
+            "webview_url" => $live_stream_link['value'],
+        );
+        $data['type'] = 1;
         $this->response($data, 200);
     }
 

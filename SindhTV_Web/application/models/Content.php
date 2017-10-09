@@ -83,6 +83,25 @@ Class Content extends CI_Model {
         return $result;
     }
 
+    public function get_video_by_category($category_id, $channel_id) {
+        $sql = "SELECT content.content_id,title,description,detail_description,`data`,modified_time,`name`,path,category,video_category.id FROM content
+                    LEFT JOIN video_category
+                    ON category_id=id
+                    LEFT JOIN image
+                    ON image.content_id = content.content_id
+                    WHERE content_type_id =
+                    (
+                            SELECT content_type_id FROM content_type
+                            WHERE content = 'videos'
+                    )  AND content.channel_id = $channel_id AND category_id = $category_id 
+
+                    ORDER BY title ";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        $query->free_result();
+        return $result;
+    }
+
     public function get_content_by_id($type, $id) {
         $sql = "SELECT * FROM content
                 WHERE content_type_id =

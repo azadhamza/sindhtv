@@ -1,11 +1,11 @@
 <section class="content">
 
-    <h1>Videos</h1>
+    <h1>Headlines</h1>
 
 
     <div class="row">
         <div class="col-xs-12">
-            <a href="<?php echo site_url('admin/videos/addnew') ?>"><button class="btn btn-info pull-right" style="margin:10px ">Add New</button></a>
+            <a href="<?php echo site_url('admin/headlines/addnew') ?>"><button class="btn btn-info pull-right" style="margin:10px ">Add New</button></a>
         </div>
 
         <div class="col-xs-12">
@@ -21,46 +21,44 @@
                         <tr>
                             <th>#</th>
                             <th>Title</th>
-                            <th>Category</th>
                             <th>Description</th>
-                            <th>Video Link</th>
+                            <th>Headline Link</th>
                             <th>Status</th>
                             <th>Action</th>
 
                         </tr>
                         <?php
-                        if (!empty($videos))
-                            foreach ($videos as $videos) {
-                                $data = unserialize($videos['data']);
+                        if (!empty($headlines))
+                            foreach ($headlines as $headlines) {
+                                $data = unserialize($headlines['data']);
                                 $link = '';
                                 if ($data['type'] == 'link') {
                                     $link = $data['link'];
                                 } elseif ($data['type'] == 'upload') {
-                                    $link = $videos['image'][0]['path'] . $videos['image'][0]['name'];
+                                    $link = $headlines['image'][0]['path'] . $headlines['image'][0]['name'];
                                 }
                                 ?>
                                 <tr>
-                                    <td><?php echo $videos['content_id']; ?></td>
-                                    <td><?php echo $videos['title']; ?></td>                                
-                                    <td><?php echo!empty($videos['category_id']) ? $video_category[$videos['category_id']] : ''; ?></td>
-                                    <td><?php echo(strlen($videos['description']) > 100) ? substr($videos['description'], 0, 97) . '...' : $videos['description']; ?></td>
+                                    <td><?php echo $headlines['content_id']; ?></td>
+                                    <td><?php echo $headlines['title']; ?></td>                                
+                                    <td><?php echo(strlen($headlines['description']) > 100) ? substr($headlines['description'], 0, 97) . '...' : $headlines['description']; ?></td>
                                     <td><a href="<?php echo$link; ?>" target="_blank"><i class="fa fa-television"></i></a></td>
                                     <td>
-                                        <a href="/index.php/admin/videos/status/<?php echo $videos['content_id'] . '/' . !$videos['is_approved']; ?>"/>
+                                        <a href="/index.php/admin/headlines/status/<?php echo $headlines['content_id'] . '/' . !$headlines['is_approved']; ?>"/>
                                         <?php
-                                        echo ($videos['is_approved'] == 1) ? "<span class='label label-success'>Approved</span>" : "<span class='label label-danger'>Rejected</span>";
+                                        echo ($headlines['is_approved'] == 1) ? "<span class='label label-success'>Approved</span>" : "<span class='label label-danger'>Rejected</span>";
                                         ?>
                                         </a>
                                     </td>
 
                                     <td>
-                                        <a href="<?php echo base_url(); ?>index.php/admin/videos/view/<?php echo $videos['content_id']; ?>">View</a>
+                                        <a href="<?php echo base_url(); ?>index.php/admin/headlines/view/<?php echo $headlines['content_id']; ?>">View</a>
                                         &nbsp;&nbsp;&nbsp;
-                                        <a href="<?php echo base_url(); ?>index.php/admin/videos/edit/<?php echo $videos['content_id']; ?>">Edit</a>
+                                        <a href="<?php echo base_url(); ?>index.php/admin/headlines/edit/<?php echo $headlines['content_id']; ?>">Edit</a>
                                         &nbsp;&nbsp;&nbsp;
-                                        <a href="<?php echo base_url(); ?>index.php/admin/videos/delete/<?php echo $videos['content_id']; ?>/<?php echo ($videos['is_active'] == 1) ? '0' : '1'; ?>" class="status_confirm">
+                                        <a href="<?php echo base_url(); ?>index.php/admin/headlines/delete/<?php echo $headlines['content_id']; ?>/<?php echo ($headlines['is_active'] == 1) ? '0' : '1'; ?>" class="status_confirm">
                                             <?php
-                                            echo ($videos['is_active'] == 1) ? "Delete" : "Activate";
+                                            echo ($headlines['is_active'] == 1) ? "Delete" : "Activate";
                                             ?>
                                         </a>
                                     </td> 

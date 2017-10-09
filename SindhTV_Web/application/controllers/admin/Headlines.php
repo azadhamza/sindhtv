@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Videos extends MY_Controller {
+class Headlines extends MY_Controller {
 
     /**
      * Index Page for this controller.
@@ -20,13 +20,12 @@ class Videos extends MY_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
-    public $type = 'videos';
+    public $type = 'headlines';
 
     function __construct() {
         parent::__construct();
         $this->load->model('content', '', TRUE);
         $this->load->model('image', '', TRUE);
-        $this->load->model('video_category', '', TRUE);
 
         if (!$this->session->userdata('logged_in')) {
             redirect(base_url());
@@ -51,36 +50,30 @@ class Videos extends MY_Controller {
 
         $data["links"] = $this->pagination->create_links();
 
-        $videos = $this->content->get_content_by_type($this->type, $page, $current_channel['id']);
+        $headlines = $this->content->get_content_by_type($this->type, $page, $current_channel['id']);
 
-        foreach ($videos as $value) {
-            $data['videos'][$value['content_id']] = $value;
-            $data['videos'][$value['content_id']]['image'] = $this->image->get_images_by_content_id($value['content_id']);
+        foreach ($headlines as $value) {
+            $data['headlines'][$value['content_id']] = $value;
+            $data['headlines'][$value['content_id']]['image'] = $this->image->get_images_by_content_id($value['content_id']);
         }
 
-        $video_categories = $this->video_category->get_all();
-        foreach ($video_categories as $category) {
-            $data['video_category'][$category['id']] = $category['category'];
-        }
+
         $content = $this->load->view($this->type . '/tabular.php', $data, true);
         $this->load->view('layout', array('content' => $content));
     }
 
     public function view($id) {
-        $videos = $this->content->get_content_by_id($this->type, $id);
-        $data['videos'] = $videos[0];
+        $headlines = $this->content->get_content_by_id($this->type, $id);
+        $data['headlines'] = $headlines[0];
         $images = $this->image->get_images_by_content_id($id);
         $thumb = $this->image->get_thumb_images_by_content_id($id);
 
-        $video_categories = $this->video_category->get_all();
-        foreach ($video_categories as $category) {
-            $data['video_category'][$category['id']] = $category['category'];
-        }
+
         foreach ($images as $image) {
-            $data['videos']['images'][] = $image['path'] . $image['name'];
+            $data['headlines']['images'][] = $image['path'] . $image['name'];
         }
         foreach ($thumb as $thumb_image) {
-            $data['videos']['thumb'][] = $thumb_image['path'] . $thumb_image['name'];
+            $data['headlines']['thumb'][] = $thumb_image['path'] . $thumb_image['name'];
         }
 
         $content = $this->load->view($this->type . '/view.php', $data, true);
@@ -91,20 +84,19 @@ class Videos extends MY_Controller {
     public function edit($id) {
         $current_channel = ($this->session->userdata('current_channel')) ? $this->session->userdata('current_channel') : '';
         $data['titles'] = $this->content->get_all_titles($this->type, $current_channel['id']);
-        $videos = $this->content->get_content_by_id($this->type, $id);
-        $data['videos'] = $videos[0];
+        $headlines = $this->content->get_content_by_id($this->type, $id);
+        $data['headlines'] = $headlines[0];
         $images = $this->image->get_images_by_content_id($id);
         $thumb = $this->image->get_thumb_images_by_content_id($id);
-        $data['video_category'] = $this->video_category->get_all();
         foreach ($images as $image) {
-            $data['videos']['images'][] = array(
+            $data['headlines']['images'][] = array(
                 'path' => $image['path'] . $image['name'],
                 'id' => $image['image_id']
             );
         }
 
         foreach ($thumb as $thumb_image) {
-            $data['videos']['thumb'][] = array(
+            $data['headlines']['thumb'][] = array(
                 'path' => $thumb_image['path'] . $thumb_image['name'],
                 'id' => $thumb_image['image_id']
             );
@@ -116,70 +108,69 @@ class Videos extends MY_Controller {
     public function update() {
 
         $serialize_data = array();
-        $serialize_data = !empty($_POST['videos']['data']) ? $_POST['videos']['data'] : '';
+        $serialize_data = !empty($_POST['headlines']['data']) ? $_POST['headlines']['data'] : '';
 
         $data = array(
-            'title' => !empty($_POST['videos']['title']) ? $_POST['videos']['title'] : '',
-            'start_date' => !empty($_POST['videos']['start_date']) ? $_POST['videos']['start_date'] : '',
-            'end_date' => !empty($_POST['videos']['end_date']) ? $_POST['videos']['end_date'] : '',
-            'description' => !empty($_POST['videos']['description']) ? $_POST['videos']['description'] : '',
-            'detail_description' => !empty($_POST['videos']['detail_description']) ? $_POST['videos']['detail_description'] : '',
-            'category_id' => !empty($_POST['videos']['category_id']) ? $_POST['videos']['category_id'] : '',
+            'title' => !empty($_POST['headlines']['title']) ? $_POST['headlines']['title'] : '',
+            'start_date' => !empty($_POST['headlines']['start_date']) ? $_POST['headlines']['start_date'] : '',
+            'end_date' => !empty($_POST['headlines']['end_date']) ? $_POST['headlines']['end_date'] : '',
+            'description' => !empty($_POST['headlines']['description']) ? $_POST['headlines']['description'] : '',
+            'detail_description' => !empty($_POST['headlines']['detail_description']) ? $_POST['headlines']['detail_description'] : '',
+            'category_id' => !empty($_POST['headlines']['category_id']) ? $_POST['headlines']['category_id'] : '',
             'data' => serialize($serialize_data),
         );
 
-        $videos_id = $this->content->update_content_by_id($_POST['videos']['id'], $data);
-        $image_data = $this->uploadImageFile($videos_id, $this->type);
+        $headlines_id = $this->content->update_content_by_id($_POST['headlines']['id'], $data);
+        $image_data = $this->uploadImageFile($headlines_id, $this->type);
 
 
 
         if ($this->uploadSuccess) {
-            $this->image->add_images($image_data, TRUE, $videos_id);
+            $this->image->add_images($image_data, TRUE, $headlines_id);
         }
 
-        $thumb_data = $this->uploadThumbImageFile($videos_id, $this->type);
+        $thumb_data = $this->uploadThumbImageFile($headlines_id, $this->type);
         if ($this->uploadSuccess) {
-            $this->image->add_thumb($thumb_data, TRUE, $videos_id);
+            $this->image->add_thumb($thumb_data, TRUE, $headlines_id);
         }
 
-        redirect(site_url('admin/' . $this->type . '/edit/' . $videos_id));
+        redirect(site_url('admin/' . $this->type . '/edit/' . $headlines_id));
     }
 
     public function addnew() {
         $current_channel = ($this->session->userdata('current_channel')) ? $this->session->userdata('current_channel') : '';
         $data['titles'] = $this->content->get_all_titles($this->type, $current_channel['id']);
-        $data['video_category'] = $this->video_category->get_all();
         $content = $this->load->view($this->type . '/new.php', $data, true);
         $this->load->view('layout', array('content' => $content));
     }
 
     public function submit() {
         $serialize_data = array();
-        $serialize_data = !empty($_POST['videos']['data']) ? $_POST['videos']['data'] : '';
+        $serialize_data = !empty($_POST['headlines']['data']) ? $_POST['headlines']['data'] : '';
         $current_channel = ($this->session->userdata('current_channel')) ? $this->session->userdata('current_channel') : '';
         $data = array(
-            'title' => !empty($_POST['videos']['title']) ? $_POST['videos']['title'] : '',
-            'start_date' => !empty($_POST['videos']['start_date']) ? $_POST['videos']['start_date'] : '',
-            'end_date' => !empty($_POST['videos']['end_date']) ? $_POST['videos']['end_date'] : '',
-            'description' => !empty($_POST['videos']['description']) ? $_POST['videos']['description'] : '',
+            'title' => !empty($_POST['headlines']['title']) ? $_POST['headlines']['title'] : '',
+            'start_date' => !empty($_POST['headlines']['start_date']) ? $_POST['headlines']['start_date'] : '',
+            'end_date' => !empty($_POST['headlines']['end_date']) ? $_POST['headlines']['end_date'] : '',
+            'description' => !empty($_POST['headlines']['description']) ? $_POST['headlines']['description'] : '',
             'channel_id' => !empty($current_channel['id']) ? $current_channel['id'] : '',
-            'detail_description' => !empty($_POST['videos']['detail_description']) ? $_POST['videos']['detail_description'] : '',
-            'category_id' => !empty($_POST['videos']['category_id']) ? $_POST['videos']['category_id'] : '',
+            'detail_description' => !empty($_POST['headlines']['detail_description']) ? $_POST['headlines']['detail_description'] : '',
+            'category_id' => !empty($_POST['headlines']['category_id']) ? $_POST['headlines']['category_id'] : '',
             'data' => serialize($serialize_data),
         );
 
-        $videos_id = $this->content->add_content($data, $this->type);
-        $image_data = $this->uploadImageFile($videos_id, $this->type);
+        $headlines_id = $this->content->add_content($data, $this->type);
+        $image_data = $this->uploadImageFile($headlines_id, $this->type);
 
         if ($this->uploadSuccess) {
-            $this->image->add_images($image_data, TRUE, $videos_id);
+            $this->image->add_images($image_data, TRUE, $headlines_id);
         }
-        $thumb_data = $this->uploadThumbImageFile($videos_id, $this->type);
+        $thumb_data = $this->uploadThumbImageFile($headlines_id, $this->type);
         if ($this->uploadSuccess) {
-            $this->image->add_thumb($thumb_data, TRUE, $videos_id);
+            $this->image->add_thumb($thumb_data, TRUE, $headlines_id);
         }
 
-        redirect(site_url('admin/' . $this->type . '/view/' . $videos_id));
+        redirect(site_url('admin/' . $this->type . '/view/' . $headlines_id));
     }
 
     public function delete($id, $status, $view = NULL) {

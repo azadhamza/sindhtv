@@ -11,6 +11,19 @@ Class Image extends CI_Model {
             if ($replaced) {
                 $deactive = array('is_active' => 0);
                 $this->db->where('content_id', $id);
+                $this->db->where('is_thumb', 0);
+                $this->db->update('image', $deactive);
+            }
+            $this->db->insert('image', $image);
+        }
+    }
+
+    function add_thumb($data, $replaced = FALSE, $id = NULL) {
+        foreach ($data as $image) {
+            if ($replaced) {
+                $deactive = array('is_active' => 0);
+                $this->db->where('content_id', $id);
+                $this->db->where('is_thumb', 1);
                 $this->db->update('image', $deactive);
             }
             $this->db->insert('image', $image);
@@ -19,6 +32,17 @@ Class Image extends CI_Model {
 
     function get_images_by_content_id($content_id) {
         $this->db->where('is_active', 1);
+        $this->db->where('is_thumb', 0);
+
+        $query = $this->db->get_where('image', array('content_id' => $content_id));
+        $result = $query->result_array();
+        $query->free_result();
+        return $result;
+    }
+
+    function get_thumb_images_by_content_id($content_id) {
+        $this->db->where('is_active', 1);
+        $this->db->where('is_thumb', 1);
         $query = $this->db->get_where('image', array('content_id' => $content_id));
         $result = $query->result_array();
         $query->free_result();
@@ -27,6 +51,7 @@ Class Image extends CI_Model {
 
     function get_images_by_page_id($page_id) {
         $this->db->where('is_active', 1);
+        $this->db->where('is_thumb', 0);
         $query = $this->db->get_where('image', array('page_id' => $page_id));
         $result = $query->result_array();
         $query->free_result();

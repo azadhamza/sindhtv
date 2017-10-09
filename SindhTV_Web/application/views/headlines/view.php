@@ -1,5 +1,5 @@
 <?php
-$data = unserialize($videos['data']);
+$data = unserialize($headlines['data']);
 ?>
 <!-- Main content -->
 
@@ -15,22 +15,19 @@ $data = unserialize($videos['data']);
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td>            <p class="lead col-xs-6">Video # <?php echo ucfirst($videos['content_id']); ?></p>
+                                <td>            <p class="lead col-xs-6">Headline # <?php echo ucfirst($headlines['content_id']); ?></p>
                                 </td>
-                                <td >            <a href="<?php echo site_url('admin/videos/delete/' . $videos['content_id'] . '/' . (($videos['is_active'] == 1) ? '0' : '1') . '/view'); ?>"><button class="btn <?php echo ($videos['is_active'] == 1) ? "btn-danger" : "btn-primary"; ?> pull-right status_confirm" style="margin:10px "><?php echo ($videos['is_active'] == 1) ? "Delete" : "Activate"; ?></button></a>
+                                <td >            <a href="<?php echo site_url('admin/headlines/delete/' . $headlines['content_id'] . '/' . (($headlines['is_active'] == 1) ? '0' : '1') . '/view'); ?>"><button class="btn <?php echo ($headlines['is_active'] == 1) ? "btn-danger" : "btn-primary"; ?> pull-right status_confirm" style="margin:10px "><?php echo ($headlines['is_active'] == 1) ? "Delete" : "Activate"; ?></button></a>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Title:</th>
-                                <td><?php echo $videos['title']; ?></td>
+                                <td><?php echo $headlines['title']; ?></td>
                             </tr>
-                            <tr>
-                                <th>Category:</th>
-                                <td><?php echo!empty($videos['category_id']) ? $video_category[$videos['category_id']] : ''; ?></td>
-                            </tr>
+                      
                             <tr>
                                 <th>Description</th>
-                                <td><?php echo $videos['description']; ?></td>
+                                <td><?php echo $headlines['description']; ?></td>
                             </tr>
 
 
@@ -49,14 +46,14 @@ $data = unserialize($videos['data']);
                 <div class="box-body">
 
                     <div class="box-header">
-                        <h3 class="box-title">Video</h3>
+                        <h3 class="box-title">Headline Video</h3>
                     </div>
                     <?php
-                    if (!empty($videos['images'])) {
+                    if (!empty($headlines['images'])) {
                         ?>
                         <ul class="jFiler-item-list box-body ">
                             <?php
-                            foreach ($videos['images'] as $image) {
+                            foreach ($headlines['images'] as $image) {
                                 ?>
                                 <li class="jFiler-item" data-jfiler-index="3" style="">    
                                     <div class="jFiler-item-container">               
@@ -79,18 +76,18 @@ $data = unserialize($videos['data']);
                         <?php
                     } else {
                         ?>
-                        <p>No Video so far.</p>
+                        <p>No Headline so far.</p>
                     <?php }
                     ?>
 
                     <div class="box-header">
                         <h3 class="box-title">Thumbnail</h3>
                     </div>              
-                    <?php if (!empty($videos['thumb'])) {
+                    <?php if (!empty($headlines['thumb'])) {
                         ?>
                         <ul class="jFiler-item-list box-body ">
                             <?php
-                            foreach ($videos['thumb'] as $thumb) {
+                            foreach ($headlines['thumb'] as $thumb) {
                                 ?>
                                 <li class="jFiler-item" data-jfiler-index="3" style="">    
                                     <div class="jFiler-item-container">               

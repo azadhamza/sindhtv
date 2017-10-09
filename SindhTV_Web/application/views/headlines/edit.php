@@ -1,12 +1,12 @@
 <?php
-$data = unserialize($videos['data']);
+$data = unserialize($headlines['data']);
 ?>
 <!-- Main content -->
 <section class="content">
 
     <div class="row">
         <div class="col-xs-12">
-            <p class="lead">Video # <?php echo ucfirst($videos['content_id']); ?></p>
+            <p class="lead">Headline # <?php echo ucfirst($headlines['content_id']); ?></p>
 
             <div class="col-xs-6">
                 <div class="table-responsive">
@@ -14,48 +14,24 @@ $data = unserialize($videos['data']);
                     <div class="box box-primary">
 
                         <!-- form start -->
-                        <form name="edit_videos" id="club_videos" action="<?php echo base_url(); ?>index.php/admin/videos/update" method="POST"  enctype="multipart/form-data">
-                            <input name="videos[is_submit]" id="is_submit" value="1" type="hidden" />
-                            <input name="videos[id]" id="uniqid" value="<?php echo $videos['content_id']; ?>" type="hidden" />
+                        <form name="edit_headlines" id="club_headlines" action="<?php echo base_url(); ?>index.php/admin/headlines/update" method="POST"  enctype="multipart/form-data">
+                            <input name="headlines[is_submit]" id="is_submit" value="1" type="hidden" />
+                            <input name="headlines[id]" id="uniqid" value="<?php echo $headlines['content_id']; ?>" type="hidden" />
                             <div class="box-body">
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="videos[title]" list="videotitle" placeholder="Enter ..." value="<?php echo $videos['title']; ?>">
-                                    <datalist id="videotitle">
+                                    <input type="text" class="form-control" autocomplete="off" name="headlines[title]" list="headlinetitle" placeholder="Enter ..." value="<?php echo $headlines['title']; ?>">
+                                    <datalist id="headlinetitle">
                                         <?php foreach ($titles as $value) { ?>
                                             <option value="<?php echo $value['title']; ?>">                                        
                                             <?php } ?>
                                     </datalist>
                                 </div>
+                                
+                               
                                 <div class="form-group">
-                                    <!--<label>Episode/Date</label>-->
-                                    <input type="radio" id="episode" class="episode_date" name="videos[data][sub_category]" value="episode" <?php echo ($data['sub_category'] == 'episode') ? 'checked="checked"' : ''; ?>> <label for="episode">Episode</label>
-                                    <b style="margin: 0px 10px;">OR</b>
-                                    <input type="radio" id="date" class="episode_date" name="videos[data][sub_category]" value="date" <?php echo ($data['sub_category'] == 'date') ? 'checked="checked"' : ''; ?>> <label for="date">Date</label>
-
-
-                                    <span class="fa fa-calendar open-datetimepicker"></span>
-                                    <input type="text" class="form-control datepicker"  name="videos[detail_description]"  autocomplete="off" placeholder="Enter ..." value="<?php echo $videos['detail_description']; ?>">
-
-                                </div>
-                                <div class="form-group">
-                                    <label>Category</label>
-                                    <select name="videos[category_id]" class="form-control">
-                                        <option value="">Choose a Category:</option>
-                                        <?php foreach ($video_category as $value) { ?>
-                                            <option value="<?php echo $value['id']; ?>"
-                                            <?php
-                                            if ($videos['category_id'] == $value['id']) {
-                                                echo 'selected="selected"';
-                                            }
-                                            ?>
-                                                    ><?php echo $value['category']; ?></option>                                  
-                                                <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="videos_description">Description</label>
-                                    <textarea class="form-control" id="videos_description" name="videos[description]" rows="3" placeholder="Enter ..."><?php echo $videos['description']; ?></textarea>
+                                    <label for="headlines_description">Description</label>
+                                    <textarea class="form-control" id="headlines_description" name="headlines[description]" rows="3" placeholder="Enter ..."><?php echo $headlines['description']; ?></textarea>
                                 </div>
                                 <div class="form-group" >
                                     <label>Thumbnail</label><br>
@@ -65,16 +41,16 @@ $data = unserialize($videos['data']);
                                     </div>
                                 </div> 
                                 <div class="form-group ">
-                                    <label>Video</label><br>
-                                    <input type="radio" id="link" class="video" name="videos[data][type]" value="link" <?php echo ($data['type'] == 'link') ? 'checked="checked"' : ''; ?>> <label for="link">Link</label>
+                                    <label>Headline</label><br>
+                                    <input type="radio" id="link" class="video" name="headlines[data][type]" value="link" <?php echo ($data['type'] == 'link') ? 'checked="checked"' : ''; ?>> <label for="link">Link</label>
                                     <b style="margin: 0px 10px;">OR</b>
-                                    <input type="radio" id="video" class="video" name="videos[data][type]" value="upload" <?php echo ($data['type'] == 'upload') ? 'checked="checked"' : ''; ?>> <label for="video">Upload</label>
+                                    <input type="radio" id="video" class="video" name="headlines[data][type]" value="upload" <?php echo ($data['type'] == 'upload') ? 'checked="checked"' : ''; ?>> <label for="headline">Upload</label>
                                 </div>
 
 
                                 <div class="form-group link-sec" <?php echo ($data['type'] == 'upload') ? 'style="display:none;"' : ''; ?>>
                                     <label>Link</label>
-                                    <input type="text" class="form-control" name="videos[data][link]" placeholder="Enter ..." value="<?php echo $data['link']; ?>">
+                                    <input type="text" class="form-control" name="headlines[data][link]" placeholder="Enter ..." value="<?php echo $data['link']; ?>">
                                 </div>
                                 <div class="form-group upload-sec" <?php echo ($data['type'] == 'link') ? 'style="display:none;"' : ''; ?>>
                                     <div style="background: #f7f8fa;padding: 50px;">
@@ -94,7 +70,7 @@ $data = unserialize($videos['data']);
             <div class="col-md-6" <?php echo ($data['type'] == 'link') ? 'style="display:none;"' : ''; ?>>
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Uploaded Video</h3>
+                        <h3 class="box-title">Uploaded Headline Video</h3>
                     </div>
 
 
@@ -102,11 +78,11 @@ $data = unserialize($videos['data']);
 
 
                         <?php
-                        if (!empty($videos['images'])) {
+                        if (!empty($headlines['images'])) {
                             ?>
                             <ul class="jFiler-item-list box-body ">
                                 <?php
-                                foreach ($videos['images'] as $image) {
+                                foreach ($headlines['images'] as $image) {
                                     ?>
                                     <li class="jFiler-item" data-jfiler-index="3" style="">    
                                         <div class="jFiler-item-container">               
@@ -133,7 +109,7 @@ $data = unserialize($videos['data']);
                                                         </li>                             
                                                     </ul>                                        
                                                     <ul class="list-inline pull-right">   
-                                                        <li><a href="<?php echo base_url(); ?>index.php/admin/videos/delete_image/<?php echo $image['id'] . '/' . $videos['content_id']; ?>" class="icon-jfi-trash jFiler-item-trash-action delete_anything"></a>
+                                                        <li><a href="<?php echo base_url(); ?>index.php/admin/headlines/delete_image/<?php echo $image['id'] . '/' . $headlines['content_id']; ?>" class="icon-jfi-trash jFiler-item-trash-action delete_anything"></a>
                                                         </li>                                       
                                                     </ul>                                
                                                 </div>
@@ -146,7 +122,7 @@ $data = unserialize($videos['data']);
                             <?php
                         } else {
                             ?>
-                            <p>No Video so far.</p>
+                            <p>No Headline so far.</p>
                             <?php
                         }
                         ?>
@@ -163,11 +139,11 @@ $data = unserialize($videos['data']);
 
 
                         <?php
-                        if (!empty($videos['thumb'])) {
+                        if (!empty($headlines['thumb'])) {
                             ?>
                             <ul class="jFiler-item-list box-body ">
                                 <?php
-                                foreach ($videos['thumb'] as $thumb_image) {
+                                foreach ($headlines['thumb'] as $thumb_image) {
                                     ?>
                                     <li class="jFiler-item" data-jfiler-index="3" style="">    
                                         <div class="jFiler-item-container">               
@@ -194,7 +170,7 @@ $data = unserialize($videos['data']);
                                                         </li>                             
                                                     </ul>                                        
                                                     <ul class="list-inline pull-right">   
-                                                        <li><a href="<?php echo base_url(); ?>index.php/admin/videos/delete_thumb_image/<?php echo $thumb_image['id'] . '/' . $videos['content_id']; ?>" class="icon-jfi-trash jFiler-item-trash-action delete_anything"></a>
+                                                        <li><a href="<?php echo base_url(); ?>index.php/admin/headlines/delete_thumb_image/<?php echo $thumb_image['id'] . '/' . $headlines['content_id']; ?>" class="icon-jfi-trash jFiler-item-trash-action delete_anything"></a>
                                                         </li>                                       
                                                     </ul>                                
                                                 </div>
@@ -207,7 +183,7 @@ $data = unserialize($videos['data']);
                             <?php
                         } else {
                             ?>
-                            <p>No Video so far.</p>
+                            <p>No Headline so far.</p>
                             <?php
                         }
                         ?>

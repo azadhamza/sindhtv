@@ -39,7 +39,7 @@
 
                             <div class="form-group">
                                 <label>Category</label>
-                                <select name="videos[data][category]" class="form-control">
+                                <select name="videos[category_id]" class="form-control">
                                     <option value="">Choose a Category:</option>
                                     <?php foreach ($video_category as $value) { ?>
                                         <option value="<?php echo $value['id']; ?>"><?php echo $value['category']; ?></option>                                  
@@ -51,6 +51,13 @@
                                 <label for="videos_description">Description</label>
                                 <textarea class="form-control" id="videos_description" name="videos[description]" rows="3" placeholder="Enter ..."></textarea>
                             </div>
+                            <div class="form-group" >
+                                <label>Thumbnail</label><br>
+                                <div style="background: #f7f8fa;padding: 50px;">
+                                    <input type="file"  name="thumb[]" id="input2">
+
+                                </div>
+                            </div> 
                             <div class="form-group ">
                                 <label>Video</label><br>
                                 <input type="radio" id="link" class="video" name="videos[data][type]" value="link" checked="checked"> <label for="link">Link</label>
@@ -70,6 +77,8 @@
 
                                 </div>
                             </div> 
+                            
+                            
 
                         </div><!-- /.box-body -->
 

@@ -37,11 +37,11 @@ class MY_Controller extends CI_Controller {
             $_FILES['userfile']['error'] = $files['userfile']['error'][$i];
             $_FILES['userfile']['size'] = $files['userfile']['size'][$i];
 
-           
+
             //$this->load->library('upload', $config);
             if (!$this->upload->do_upload()) {
                 $this->uploadSuccess = false;
-                
+
                 $this->uploadError = array('error' => $this->upload->display_errors());
             } else {
                 $this->uploadSuccess = true;
@@ -56,6 +56,72 @@ class MY_Controller extends CI_Controller {
                 'name' => $image_data['file_name'],
                 'path' => base_url() . 'assets/uploads/' . $type . '/' . $id . '/',
                 'is_active' => 1
+            );
+        }
+
+
+
+        if ($this->uploadSuccess == false) {
+            $this->uploadSuccess = false;
+            $this->uploadError = array('error' => $this->upload->display_errors());
+        } else {
+            $this->uploadSuccess = true;
+            $this->uploadData = $this->upload->data();
+            return $data;
+        }
+    }
+
+    public function uploadThumbImageFile($id, $type) {
+
+        $path = './assets/uploads/' . $type . '/' . $id . '/thumb';
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $files = $_FILES;
+        $cpt = count($_FILES['thumb']['name']);
+
+
+        $config['upload_path'] = $path;
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '*';
+        $config['max_width'] = '10024';
+        $config['max_height'] = '10768';
+        $this->upload->initialize($config);
+
+        if (!file_exists('path/to/directory')) {
+            mkdir('path/to/directory', 0777, true);
+        }
+
+
+        for ($i = $cpt - 1; $i >= 0; $i--) {
+
+            $_FILES['userfile']['name'] = $files['thumb']['name'][$i];
+            $_FILES['userfile']['type'] = $files['thumb']['type'][$i];
+            $_FILES['userfile']['tmp_name'] = $files['thumb']['tmp_name'][$i];
+            $_FILES['userfile']['error'] = $files['thumb']['error'][$i];
+            $_FILES['userfile']['size'] = $files['thumb']['size'][$i];
+
+
+            //$this->load->library('upload', $config);
+            if (!$this->upload->do_upload()) {
+                $this->uploadSuccess = false;
+
+                $this->uploadError = array('error' => $this->upload->display_errors());
+            } else {
+                $this->uploadSuccess = true;
+                $this->uploadData = $this->upload->data();
+                //return $data;
+            }
+            $image_data = $this->upload->data();
+
+
+            $data[$i] = array(
+                'content_id' => $id,
+                'name' => $image_data['file_name'],
+                'path' => base_url() . 'assets/uploads/' . $type . '/' . $id . '/thumb/',
+                'is_active' => 1,
+                'is_thumb' => 1
             );
         }
 
