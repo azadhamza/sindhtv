@@ -76,8 +76,8 @@ public class ServiceHandler {
 			e.printStackTrace();
 		}
 
-		Log.d(TAG, "Response --> " + url);
-		Log.d(TAG, "Response --> " + response);
+		Log.d(TAG, "Response <-- " + url);
+		Log.d(TAG, "Response <-- " + response);
 
 		return response;
 

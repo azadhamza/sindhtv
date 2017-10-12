@@ -165,17 +165,19 @@ public class LiveFragment extends Fragment {
 
             try {
                 JSONObject jsonobject = new JSONObject(jsonStr);
-                JSONArray jsonArrayMian = jsonobject.getJSONArray("items");
+                JSONObject items = jsonobject.getJSONObject("items");
+                webview_url = items.getString("webview_url");
+                audio_url = items.getString("audio_url");
 
-                for (int j = 0; j < jsonArrayMian.length(); j++) {
-
-                    JSONObject jsonobject2 = jsonArrayMian.getJSONObject(j);
-
-                     webview_url = jsonobject2.getString("webview_url");
-
-                    audio_url = jsonobject2.getString("audio_url");
-
-                }
+//                for (int j = 0; j < items.length(); j++) {
+//
+//                    JSONObject jsonobject2 = items.getJSONObject(j);
+//
+//                     webview_url = jsonobject2.getString("webview_url");
+//
+//                    audio_url = jsonobject2.getString("audio_url");
+//
+//                }
 
 
             } catch (JSONException e) {
