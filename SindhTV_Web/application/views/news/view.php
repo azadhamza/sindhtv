@@ -24,7 +24,10 @@ $data = unserialize($news['data']);
                                 <th>Title:</th>
                                 <td><?php echo $news['title']; ?></td>
                             </tr>
-
+                            <tr>
+                                <th>Category:</th>
+                                <td><?php echo $news_category[$data['category']]; ?></td>
+                            </tr>
                             <tr>
                                 <th>Description</th>
                                 <td><?php echo $news['description']; ?></td>

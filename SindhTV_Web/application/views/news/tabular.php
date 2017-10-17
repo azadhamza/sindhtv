@@ -21,6 +21,7 @@
                         <tr>
                             <th>#</th>
                             <th>Title</th>
+                            <th>Category</th>
                             <th>Description</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -33,11 +34,14 @@
                             <tr>
                                 <td><?php echo $news['content_id']; ?></td>
                                 <td><?php echo $news['title']; ?></td>
+                                <td><?php echo $news_category[$data['category']]; ?></td>
                                 <td><?php echo(strlen($news['description']) > 100) ? substr($news['description'], 0, 97) . '...' : $news['description']; ?></td>
                                 <td>
+                                    <a href="/index.php/admin/news/status/<?php echo $news['content_id'] . '/' . !$news['is_approved']; ?>"/>
                                     <?php
-                                    echo ($news['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                    echo ($news['is_approved'] == 1) ? "<span class='label label-success'>Approved</span>" : "<span class='label label-danger'>Rejected</span>";
                                     ?>
+                                    </a>
                                 </td>
 
                                 <td>
@@ -50,6 +54,8 @@
                                         echo ($news['is_active'] == 1) ? "Delete" : "Activate";
                                         ?>
                                     </a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <a target="_blank" href="<?php echo base_url(); ?>index.php/view/news/<?php echo $news['content_id']; ?>">App View</a>
                                 </td> 
                             </tr>
                             <?php
