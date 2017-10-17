@@ -445,9 +445,14 @@ public class ArticleFragment  extends Fragment {
             // Log.e("Child====", "" + currentList.get(position)._smallTitle);
 
             textVideo.setText(currentList.get(position)._smallTitle);
-            Picasso.with(getActivity())
-                    .load(currentList.get(position)._thumb)
-                    .placeholder(R.drawable.black).into(imageVideoAccount);
+            String thumbUrl = currentList.get(position)._thumb;
+            if(!thumbUrl.isEmpty()) {
+                Picasso
+                        .with(getActivity())
+                        .load(thumbUrl)
+                        .placeholder(R.drawable.black)
+                        .into(imageVideoAccount);
+            }
 
             textTime.setText(currentList.get(position)._duration);
             //	textVideoBy.setText(currentList.get(position)._userName);
