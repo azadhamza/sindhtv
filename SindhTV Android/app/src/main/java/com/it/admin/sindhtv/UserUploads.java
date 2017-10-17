@@ -738,7 +738,7 @@ public class UserUploads extends AppCompatActivity implements View.OnClickListen
             // TODO Auto-generated method stub,
 
             String response = getHTTPResponse(WebServicesUrls.BASE_URL
-                    + WebServicesUrls.POST_UPLOAD);
+                    + WebServicesUrls.POST_UPLOAD + channelID);
 
             JSONObject mObject;
             try {
@@ -1064,7 +1064,7 @@ public class UserUploads extends AppCompatActivity implements View.OnClickListen
             String responseString = null;
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(WebServicesUrls.BASE_URL+ WebServicesUrls.POST_UPLOAD+channelID);
+            HttpPost httppost = new HttpPost(WebServicesUrls.BASE_URL + WebServicesUrls.POST_UPLOAD + channelID);
 
             try {
                 AndroidMultiPartEntity entity = new AndroidMultiPartEntity(

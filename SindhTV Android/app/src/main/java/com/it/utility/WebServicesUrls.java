@@ -14,9 +14,6 @@ public class WebServicesUrls {
     public static String GET_HEADLINES = "headlines/";
     public static String GET_VIDEO_CATEGORY = "video_categories/";
     public static String GET_VIDEO = "category_video/";
-
-
-    public static String GET_VIDEOCHANNELS = "packagelist/";
-    public static String POST_UPLOAD = "appfeedback/2/";
+    public static String POST_UPLOAD = "user_upload/";
 
 }

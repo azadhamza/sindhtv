@@ -186,7 +186,7 @@ public class HeadlineFragments  extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
 
-            String url = WebServicesUrls.BASE_URL + WebServicesUrls.GET_VIDEOCHANNELS + channelID + "/3?appid=" + appId;
+            String url = WebServicesUrls.BASE_URL + WebServicesUrls.GET_HEADLINES + channelID;
 
             ServiceHandler service = new ServiceHandler();
 
@@ -208,7 +208,7 @@ public class HeadlineFragments  extends Fragment {
 
                     JSONObject jsonobject2 = jsonArrayMian.getJSONObject(j);
 
-                    String catName = jsonobject2.getString("date");
+                    String catName = jsonobject2.getString("schedule_name");
                     // String channelId = jsonobject2.getString("schedule_id");
 
                     listDataHeader.add(catName);
