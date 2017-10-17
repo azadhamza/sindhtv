@@ -219,8 +219,8 @@
     
     if (sender.tag==0)
     {
-        vc.channelID=@"30";//[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
-        [defaults setValue:@"30" forKey:@"channelID"];
+        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
+        [defaults setValue:vc.channelID forKey:@"channelID"];
 
         
         
@@ -234,8 +234,8 @@
     else if (sender.tag==1)
     {
 //    sindhtvnews_bg
-        vc.channelID=@"29";//[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
-        [defaults setValue:@"29" forKey:@"channelID"];
+        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
+        [defaults setValue:vc.channelID forKey:@"channelID"];
         NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"sindhtvnews_bg"], 1.0);
         
         [ defaults setValue:@"sindhtvnewsIcon" forKey:@"applogo"];
@@ -245,8 +245,8 @@
 
     }
     else{
-        vc.channelID=@"58";//[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
-        [defaults setValue:@"58" forKey:@"channelID"];
+        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
+        [defaults setValue:vc.channelID forKey:@"channelID"];
         [ defaults setValue:@"jeejalIcon" forKey:@"applogo"];
         [defaults synchronize];
 

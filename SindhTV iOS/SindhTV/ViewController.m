@@ -534,7 +534,7 @@
             
             GDLiveController *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"watchLive"];
             
-            lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
+            lifelineViewController.urlString=[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/live_stream/%@",[defaults valueForKey:@"channelID"]];
             lifelineViewController.view.frame =self.mainVw.bounds;
             
             [lifelineViewController willMoveToParentViewController:self];
@@ -554,7 +554,7 @@
             GDLiveViewController *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"live"];
             lifelineViewController.fromHeadlines=@"headLines";
             
-            lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
+            lifelineViewController.urlString=[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/headlines/%@",[defaults valueForKey:@"channelID"]];
             
             lifelineViewController.view.frame =self.mainVw.bounds;
             [lifelineViewController willMoveToParentViewController:self];
@@ -574,7 +574,8 @@
             GDNewsArticlesVC *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"articlesTbl"];
             
             lifelineViewController.fromHeadlines=@"FROMARTICLES";
-            lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
+            lifelineViewController.urlString = [NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/news/%@",[defaults valueForKey:@"channelID"]];
+            
             
             lifelineViewController.view.frame =self.mainVw.bounds;
             [lifelineViewController willMoveToParentViewController:self];
@@ -594,7 +595,7 @@
             firstTime=NO;
             GDChannelVideos *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"GDMyVideos"];
             
-            lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
+            lifelineViewController.urlString=[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/video_categories/%@",[defaults valueForKey:@"channelID"]];
             
             lifelineViewController.view.frame =self.mainVw.bounds;
             [lifelineViewController willMoveToParentViewController:self];

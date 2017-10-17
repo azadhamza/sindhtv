@@ -181,7 +181,7 @@
         cell.titleHeader.text=[[titleNamesArr valueForKey:@"schedule_name" ] objectAtIndex:indexPath.section];
     }
     else{
-        cell.titleHeader.text=[[titleNamesArr valueForKey:@"date" ] objectAtIndex:indexPath.section];
+        cell.titleHeader.text=[[titleNamesArr valueForKey:@"schedule_name" ] objectAtIndex:indexPath.section];
     }
     cell.titleHeader.font = [UIFont fontWithName:@"Arial-BoldMT" size:16];
     cell.titleHeader.textColor=[UIColor whiteColor];
@@ -420,7 +420,7 @@
                             JSONObjectWithData:urlData
                             options:NSJSONReadingMutableContainers
                             error:nil];
-                if ([[jsonData objectForKey:@"items"] isKindOfClass:[NSArray class]])
+                if ([jsonData objectForKey:@"items"])
                 {
                     titleNamesArr=[[NSMutableArray alloc]init];
                     titleNamesArr=[[jsonData objectForKey:@"items"] mutableCopy];
