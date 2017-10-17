@@ -219,8 +219,8 @@
     
     if (sender.tag==0)
     {
-        vc.channelID=@"30";//[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
-        [defaults setValue:@"30" forKey:@"channelID"];
+        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
+        [defaults setValue:vc.channelID forKey:@"channelID"];
 
         
         
@@ -234,8 +234,8 @@
     else if (sender.tag==1)
     {
 //    sindhtvnews_bg
-        vc.channelID=@"29";//[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
-        [defaults setValue:@"29" forKey:@"channelID"];
+        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
+        [defaults setValue:vc.channelID forKey:@"channelID"];
         NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"sindhtvnews_bg"], 1.0);
         
         [ defaults setValue:@"sindhtvnewsIcon" forKey:@"applogo"];
@@ -245,8 +245,8 @@
 
     }
     else{
-        vc.channelID=@"58";//[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
-        [defaults setValue:@"58" forKey:@"channelID"];
+        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
+        [defaults setValue:vc.channelID forKey:@"channelID"];
         [ defaults setValue:@"jeejalIcon" forKey:@"applogo"];
         [defaults synchronize];
 
@@ -285,7 +285,7 @@
         
         
         
-        ChannelUrl=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://poovee.net/webservices/package/%li",(long)[defaults integerForKey:@"appID"]]];
+        ChannelUrl=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/config"]];
         
         
         NSLog(@"URL ====== %@",ChannelUrl);
@@ -378,32 +378,7 @@
                 self.bannerView.adUnitID = [defaults valueForKey:@"bannerCode"];
                 self.bannerView.rootViewController = self;
                 [self.bannerView loadRequest:[DFPRequest request]];
-                
-//                NSURL *url=[NSURL URLWithString:bgImageString];
-//                
-//                [self downloadImageWithURL:url completionBlock:^(BOOL succeeded, UIImage *image) {
-//                    if (succeeded) {
-//                        
-//                        if (image==nil) {
-//                            self.backGroundVw.image=[UIImage imageNamed:@"bgforLive"];
-//                        }
-//                        else{
-//                            
-//                            NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-//                            
-//                            [ defaults setObject:imageData forKey:@"bgImg"];
-//                            [defaults synchronize];
-//                            self.backGroundVw.image=image;
-//                            
-//                        }
-//                        // save image in
-//                    }
-//                    else
-//                    {
-//                        self.backGroundVw.image=[UIImage imageNamed:@"bgforLive"];
-//                    }
-//                    
-//                }];
+
                 
                 NSString *appLogo=[NSString stringWithFormat:@"%@", [[jsonData objectForKey:@"application" ] valueForKey:@"application_logo"]];
                 [defaults setValue:[[jsonData objectForKey:@"application" ] valueForKey:@"application_logo"] forKey:@"imageUrl"];

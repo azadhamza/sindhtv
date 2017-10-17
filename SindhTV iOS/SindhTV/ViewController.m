@@ -101,20 +101,20 @@
     
     [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:negativeSpacer,self.menuBtn, nil] animated:YES];
     
-  //  UIImage *image = [UIImage imageWithData:[defaults valueForKey:@"applogo"]];
+    //  UIImage *image = [UIImage imageWithData:[defaults valueForKey:@"applogo"]];
     
     imageview1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[defaults valueForKey:@"applogo"]]];
-
-     imageview1.frame=CGRectMake(0, 0, 200, 40);
+    
+    imageview1.frame=CGRectMake(0, 0, 200, 40);
     imageview1.backgroundColor=[UIColor clearColor];
     
     self.navigationItem.titleView.backgroundColor=[UIColor clearColor];
     
-     imageview1.contentMode = UIViewContentModeScaleAspectFit;
+    imageview1.contentMode = UIViewContentModeScaleAspectFit;
     
     self.navigationItem.titleView = imageview1;
     
-   
+    
     
     
     
@@ -183,7 +183,7 @@
     //setBoolNoForEpaper
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setBoolValueNoForWebView) name:@"setBoolNoForEpaper" object:nil];
     //reloadArticlesView
-  
+    
     
     UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeleft)];
     swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
@@ -191,8 +191,8 @@
     UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight)];
     swiperight.direction=UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swiperight];
-
- 
+    
+    
 }
 -(void)swipeleft{
     if (!IS_IPAD) {
@@ -347,7 +347,7 @@
     }
     else {
         
-        if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToString:@"1"])
+        if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToNumber:[NSNumber numberWithInt:1]])
             
         {
             firstTime=NO;
@@ -365,7 +365,7 @@
             indPath=reloadPath;
         }
         
-        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToString:@"3"])
+        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToNumber:[NSNumber numberWithInt:3]])
             
         {
             firstTime=NO;
@@ -382,7 +382,7 @@
             
         }
         
-        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToString:@"7"])
+        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToNumber:[NSNumber numberWithInt:7]])
             
         {
             
@@ -400,7 +400,7 @@
         }
         
         //GDMyVideos
-        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToString:@"10"])
+        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToNumber:[NSNumber numberWithInt:10]])
             
         {
             firstTime=NO;
@@ -417,7 +417,7 @@
         }
         
         
-        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToString:@"11"])
+        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:reloadPath.row] isEqualToNumber:[NSNumber numberWithInt:11]])
             
         {
             firstTime=NO;
@@ -461,7 +461,7 @@
     ArrayForColVw=[[NSMutableArray alloc]init];
     
     for (int j=0; j<titleNamesArr.count; j++) {
-        if ([[[titleNamesArr valueForKey:@"is_listmenu" ] objectAtIndex:j] isEqualToString:@"0"])
+        if ([[[titleNamesArr objectAtIndex:j] valueForKey:@"is_listmenu"]  isEqualToNumber:[NSNumber numberWithInt:0]])
         {
             [ArrayForColVw addObject:[titleNamesArr objectAtIndex:j]];
         }
@@ -485,7 +485,7 @@
     
     
     cell.separatorImage.backgroundColor=[self colorWithHexString:[defaults valueForKey:@"colVwSepearator"]];
-     
+    
     
     
     indPath=indexPath;
@@ -521,113 +521,114 @@
     cell1.imgClr.backgroundColor=[self colorWithHexString:[defaults valueForKey:@"colVwUnderLineClr"]];
     
     
-        dispatch_async(dispatch_get_main_queue(), ^{
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+        
+        NSLog(@"ArrayForColVw %@",ArrayForColVw);
+        if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:1]])
+            
+        {
+            firstTime=NO;
+            
+            
+            GDLiveController *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"watchLive"];
+            
+            lifelineViewController.urlString=[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/live_stream/%@",[defaults valueForKey:@"channelID"]];
+            lifelineViewController.view.frame =self.mainVw.bounds;
+            
+            [lifelineViewController willMoveToParentViewController:self];
+            [self.mainVw addSubview:lifelineViewController.view];
+            [self addChildViewController:lifelineViewController];
+            [lifelineViewController didMoveToParentViewController:self];
+            indPath=indexPath;
+            reloadPath=indexPath;
+            
+            indexInteger=indexPath.row;
+        }
+        
+        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:3]])
+            
+        {
+            firstTime=NO;
+            GDLiveViewController *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"live"];
+            lifelineViewController.fromHeadlines=@"headLines";
+            
+            lifelineViewController.urlString=[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/headlines/%@",[defaults valueForKey:@"channelID"]];
+            
+            lifelineViewController.view.frame =self.mainVw.bounds;
+            [lifelineViewController willMoveToParentViewController:self];
+            [self.mainVw addSubview:lifelineViewController.view];
+            [self addChildViewController:lifelineViewController];
+            [lifelineViewController didMoveToParentViewController:self];
+            
+            reloadPath=indexPath;
+            indexInteger=indexPath.row;
+        }
+        
+        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:7]])
+            
+        {
+            
+            firstTime=NO;
+            GDNewsArticlesVC *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"articlesTbl"];
+            
+            lifelineViewController.fromHeadlines=@"FROMARTICLES";
+            lifelineViewController.urlString = [NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/news/%@",[defaults valueForKey:@"channelID"]];
+            
+            
+            lifelineViewController.view.frame =self.mainVw.bounds;
+            [lifelineViewController willMoveToParentViewController:self];
+            [self.mainVw addSubview:lifelineViewController.view];
+            [self addChildViewController:lifelineViewController];
+            [lifelineViewController didMoveToParentViewController:self];
+            reloadPath=indexPath;
+            indexInteger=indexPath.row;
+            
+            
+        }
+        
+        //GDVideos
+        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:10]])
+            
+        {
+            firstTime=NO;
+            GDChannelVideos *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"GDMyVideos"];
+            
+            lifelineViewController.urlString=[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/video_categories/%@",[defaults valueForKey:@"channelID"]];
+            
+            lifelineViewController.view.frame =self.mainVw.bounds;
+            [lifelineViewController willMoveToParentViewController:self];
+            [self.mainVw addSubview:lifelineViewController.view];
+            [self addChildViewController:lifelineViewController];
+            [lifelineViewController didMoveToParentViewController:self];
+            reloadPath=indexPath;
+            indexInteger=indexPath.row;
+        }
+        
+        
+        else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:11]])
+            
+        {
+            firstTime=NO;
+            GDArticlesWebView *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"articlesWebVw"];
+            
+            
+            lifelineViewController.epaperUrl=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
+            
+            
+            
+            lifelineViewController.fromEpaper=@"FROMEPAPER";
+            lifelineViewController.view.frame =self.mainVw.bounds;
+            [lifelineViewController willMoveToParentViewController:self];
+            [self.mainVw addSubview:lifelineViewController.view];
+            [self addChildViewController:lifelineViewController];
+            [lifelineViewController didMoveToParentViewController:self];
+            reloadPath=indexPath;
+            indexInteger=indexPath.row;
+        }
+    });
     
-    
-    
-    if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"1"])
-        
-    {
-        firstTime=NO;
-        
-        
-        GDLiveController *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"watchLive"];
-        
-        lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
-        lifelineViewController.view.frame =self.mainVw.bounds;
-        
-        [lifelineViewController willMoveToParentViewController:self];
-        [self.mainVw addSubview:lifelineViewController.view];
-        [self addChildViewController:lifelineViewController];
-        [lifelineViewController didMoveToParentViewController:self];
-        indPath=indexPath;
-        reloadPath=indexPath;
-        
-        indexInteger=indexPath.row;
-    }
-    
-    else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"3"])
-        
-    {
-        firstTime=NO;
-        GDLiveViewController *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"live"];
-        lifelineViewController.fromHeadlines=@"headLines";
-        
-        lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
-        
-        lifelineViewController.view.frame =self.mainVw.bounds;
-        [lifelineViewController willMoveToParentViewController:self];
-        [self.mainVw addSubview:lifelineViewController.view];
-        [self addChildViewController:lifelineViewController];
-        [lifelineViewController didMoveToParentViewController:self];
-        
-        reloadPath=indexPath;
-        indexInteger=indexPath.row;
-    }
-    
-    else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"7"])
-        
-    {
-        
-        firstTime=NO;
-        GDNewsArticlesVC *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"articlesTbl"];
-        
-        lifelineViewController.fromHeadlines=@"FROMARTICLES";
-        lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
-        
-        lifelineViewController.view.frame =self.mainVw.bounds;
-        [lifelineViewController willMoveToParentViewController:self];
-        [self.mainVw addSubview:lifelineViewController.view];
-        [self addChildViewController:lifelineViewController];
-        [lifelineViewController didMoveToParentViewController:self];
-        reloadPath=indexPath;
-        indexInteger=indexPath.row;
-        
-        
-    }
-    
-    //GDVideos
-    else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"10"])
-        
-    {
-        firstTime=NO;
-        GDChannelVideos *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"GDMyVideos"];
-        
-        lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
-        
-        lifelineViewController.view.frame =self.mainVw.bounds;
-        [lifelineViewController willMoveToParentViewController:self];
-        [self.mainVw addSubview:lifelineViewController.view];
-        [self addChildViewController:lifelineViewController];
-        [lifelineViewController didMoveToParentViewController:self];
-        reloadPath=indexPath;
-        indexInteger=indexPath.row;
-    }
-    
-    
-    else if ([[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"11"])
-        
-    {
-        firstTime=NO;
-        GDArticlesWebView *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"articlesWebVw"];
-        
-        
-        lifelineViewController.epaperUrl=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[ArrayForColVw valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
-        
-        
-        
-        lifelineViewController.fromEpaper=@"FROMEPAPER";
-        lifelineViewController.view.frame =self.mainVw.bounds;
-        [lifelineViewController willMoveToParentViewController:self];
-        [self.mainVw addSubview:lifelineViewController.view];
-        [self addChildViewController:lifelineViewController];
-        [lifelineViewController didMoveToParentViewController:self];
-        reloadPath=indexPath;
-        indexInteger=indexPath.row;
-    }
-        });
-       
     
 }
 
@@ -726,49 +727,49 @@
     }
     
     
-//    
-//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation ]== UIDeviceOrientationLandscapeRight)
-//    {
-//        
-//        
-//        
-//        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 22)];
-//        statusBarView.backgroundColor = [UIColor darkGrayColor];
-//        [self.navigationController.navigationBar addSubview:statusBarView];
-//        
-//        //        if (forArticlewebVwRotation==YES) {
-//        //            self.topMarginForColVw.constant=64;
-//        //            self.topSpaceForTable.constant=64;
-//        //            forArticlewebVwRotation=NO;
-//        //
-//        //        }
-//        if (IS_IPAD) {
-//            
-//        }else
-//        {
-//            imageview1.frame=CGRectMake(0, 0, 200, 25);
-//             imageview1.contentMode = UIViewContentModeScaleAspectFit;
-//            self.navigationItem.titleView = imageview1;
-//        }
-//        
-//        NSLog(@"Lanscapse");
-//    }
-//    if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown )
-//    {
-//          if (!IS_IPAD)
-//        {
-//            imageview1.frame=CGRectMake(0, 0, 200, 30);
-//             imageview1.contentMode = UIViewContentModeScaleAspectFit;
-//            self.navigationItem.titleView = imageview1;
-//            
-//        }
-//        
-//        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 22)];
-//        statusBarView.backgroundColor = [UIColor darkGrayColor];
-//        [self.navigationController.navigationBar addSubview:statusBarView];
-//           NSLog(@"UIDeviceOrientationPortrait");
-//    }
-//    
+    //
+    //    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation ]== UIDeviceOrientationLandscapeRight)
+    //    {
+    //
+    //
+    //
+    //        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 22)];
+    //        statusBarView.backgroundColor = [UIColor darkGrayColor];
+    //        [self.navigationController.navigationBar addSubview:statusBarView];
+    //
+    //        //        if (forArticlewebVwRotation==YES) {
+    //        //            self.topMarginForColVw.constant=64;
+    //        //            self.topSpaceForTable.constant=64;
+    //        //            forArticlewebVwRotation=NO;
+    //        //
+    //        //        }
+    //        if (IS_IPAD) {
+    //
+    //        }else
+    //        {
+    //            imageview1.frame=CGRectMake(0, 0, 200, 25);
+    //             imageview1.contentMode = UIViewContentModeScaleAspectFit;
+    //            self.navigationItem.titleView = imageview1;
+    //        }
+    //
+    //        NSLog(@"Lanscapse");
+    //    }
+    //    if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown )
+    //    {
+    //          if (!IS_IPAD)
+    //        {
+    //            imageview1.frame=CGRectMake(0, 0, 200, 30);
+    //             imageview1.contentMode = UIViewContentModeScaleAspectFit;
+    //            self.navigationItem.titleView = imageview1;
+    //
+    //        }
+    //
+    //        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 22)];
+    //        statusBarView.backgroundColor = [UIColor darkGrayColor];
+    //        [self.navigationController.navigationBar addSubview:statusBarView];
+    //           NSLog(@"UIDeviceOrientationPortrait");
+    //    }
+    //
     
     self.navigationController.navigationBarHidden=NO;
     
@@ -804,7 +805,7 @@
         
         
         
-        getListUrl=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://poovee.net/webservices/packagemenu/%li/%@",(long)[defaults integerForKey:@"appID"],channelID]];
+        getListUrl=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/menu_config"]];
         
         
         NSLog(@"URL ====== %@",getListUrl);
@@ -828,6 +829,8 @@
         NSData * urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         
         NSLog(@"Response code: %ld", (long)[response statusCode]);
+        
+        NSLog(@"Response : %@", response);
         
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -868,30 +871,6 @@
                         
                         [customIndicator stopAnimating];
                         [customIndicator removeFromSuperview];
-
-                        
-                        //                        if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indPath.row] isEqualToString:@"1"])
-                        //
-                        //                        {
-                        //                            //firstTime=NO;
-                        //
-                        //
-                        //                            GDLiveController *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"watchLive"];
-                        //
-                        //                            lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indPath.row],(long)[defaults integerForKey:@"appID"]];
-                        //
-                        //                            lifelineViewController.view.frame =self.mainVw.bounds;
-                        //
-                        //                            [lifelineViewController willMoveToParentViewController:self];
-                        //                            [self.mainVw addSubview:lifelineViewController.view];
-                        //                            [self addChildViewController:lifelineViewController];
-                        //                            [lifelineViewController didMoveToParentViewController:self];
-                        //                            [[NSNotificationCenter defaultCenter] postNotificationName:@"clearCell" object:self];
-                        //
-                        //                            self.imgVwForBg.image=[UIImage imageNamed:@"bgforLive"];
-                        //                        }
-                        
-                        
                         
                         
                     }
@@ -1081,7 +1060,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MenuClose" object:self];
     
     
-    if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"1"])
+    if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:1]])
         
     {
         
@@ -1089,13 +1068,13 @@
         
     }
     
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"3"])
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:3]])
         
     {
         
     }
     
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"7"])
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:7]])
         
     {
         
@@ -1104,18 +1083,18 @@
     
     
     
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"10"])
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:10]])
         
     {
     }
     
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"11"])
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:11]])
         
     {
     }
     //userUploads
     
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"9"])
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:9]])
         
     {
         firstTime=NO;
@@ -1124,39 +1103,39 @@
         
     }
     
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"8"])
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:8]])
         
     {
         firstTime=NO;
         NSMutableArray *sharingItems = [NSMutableArray new];
         
-       // NSData* imageData =[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [defaults objectForKey:@"channelImage"]]]];
+        // NSData* imageData =[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [defaults objectForKey:@"channelImage"]]]];
         
         UIImage* image = [UIImage imageNamed:[defaults valueForKey:@"applogo"]];
         
-      // UIImage *image1=[self   decodeBase64ToImage:[defaults objectForKey:@"channelImage"]];
+        // UIImage *image1=[self   decodeBase64ToImage:[defaults objectForKey:@"channelImage"]];
         
         
         
         NSString *appurl=[NSString stringWithFormat:@"%@",[defaults valueForKey:@"playStoreLink"]];
-
+        
         
         NSURL *imageUrl=[defaults objectForKey:@"channelImage"];
         
-       // NSMutableArray *ShareArr=[[NSMutableArray alloc]initWithObjects:image,appurl, nil];
+        // NSMutableArray *ShareArr=[[NSMutableArray alloc]initWithObjects:image,appurl, nil];
         
         
         [sharingItems addObject:appurl];
-       [sharingItems addObject:image];
+        [sharingItems addObject:image];
         [sharingItems addObject:imageUrl];
         
         NSLog(@"objects===>%@",sharingItems);
         
         UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
         
-       
-
-       // [self presentViewController:activityController animated:YES completion:nil];
+        
+        
+        // [self presentViewController:activityController animated:YES completion:nil];
         
         
         
@@ -1173,7 +1152,7 @@
         
     }
     
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"12"])
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:12]])
         
     {
         firstTime=NO;
@@ -1192,7 +1171,7 @@
         
         
     }
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"13"])
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:13]])
         
     {
         
@@ -1203,8 +1182,8 @@
         
     }
     
-//    contact us
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"15"])
+    //    contact us
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:15]])
         
     {
         
@@ -1220,8 +1199,8 @@
         [self.navigationController pushViewController:lifelineViewController animated:YES];
         
     }
-//Programs
-    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToString:@"16"])
+    //Programs
+    else if ([[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row] isEqualToNumber:[NSNumber numberWithInt:16]])
         
     {
         
@@ -1235,7 +1214,7 @@
         
         [self.navigationController pushViewController:lifelineViewController animated:YES];
     }
-
+    
     
     
     
@@ -1271,29 +1250,29 @@
 //-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 //{
 //    if (!IS_IPAD) {
-//        
+//
 //        [appdelegate hideStatusBarAction];
 //    }
 //    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation ]== UIDeviceOrientationLandscapeRight)
 //    {
-//        
-//        
-//        
+//
+//
+//
 //        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 22)];
 //        statusBarView.backgroundColor = [UIColor darkGrayColor];
 //        [self.navigationController.navigationBar addSubview:statusBarView];
-//        
+//
 //        //        if (forArticlewebVwRotation==YES) {
 //        //            self.topMarginForColVw.constant=55;
 //        //            self.topSpaceForTable.constant=55;
 //        //            forArticlewebVwRotation=NO;
 //        //        }
 //        //        else{
-//        
+//
 //        if (IS_IPAD) {
 //            self.topMarginForColVw.constant=64;
 //            self.topSpaceForTable.constant=64;
-//            
+//
 //        }
 //      else  if ([UIScreen mainScreen].bounds.size.width==736) {
 //            imageview1.frame=CGRectMake(0, 0, 200, 30);
@@ -1308,24 +1287,24 @@
 //            self.topMarginForColVw.constant=32;
 //            self.topSpaceForTable.constant=32;
 //        }
-//        
-//        
+//
+//
 //        NSLog(@"Lanscapse");
 //    }
 //    if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown )
 //    {
-//        
+//
 //        if (!IS_IPAD)
 //        {
 //            imageview1.frame=CGRectMake(0, 0, 200, 30);
 //             imageview1.contentMode = UIViewContentModeScaleAspectFit;
 //        }
-//        
+//
 //        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 22)];
 //        statusBarView.backgroundColor = [UIColor darkGrayColor];
 //        [self.navigationController.navigationBar addSubview:statusBarView];
-//        
-//        
+//
+//
 //        self.topMarginForColVw.constant=64;
 //        self.topSpaceForTable.constant=64;
 //        NSLog(@"UIDeviceOrientationPortrait");
@@ -1340,7 +1319,7 @@
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-                dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 NSIndexPath *indexPathForFirstRow = [NSIndexPath indexPathForRow:0 inSection:0];
                 [self.collectionVw selectItemAtIndexPath:indexPathForFirstRow animated:NO scrollPosition:UICollectionViewScrollPositionNone];
                 [self collectionView:self.collectionVw didSelectItemAtIndexPath:indexPathForFirstRow];
@@ -1412,54 +1391,54 @@
 -(void)RotateView
 
 {
-//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation ]== UIDeviceOrientationLandscapeRight)
-//    {
-//        
-//        
-//        
-//        
-//        if (IS_IPAD) {
-//            self.topMarginForColVw.constant=64;
-//            self.topSpaceForTable.constant=64;
-//            
-//        }
-//        else  if ([UIScreen mainScreen].bounds.size.width==736) {
-//            imageview1.frame=CGRectMake(0, 0, 200, 40);
-//            imageview1.backgroundColor=[UIColor clearColor];
-//             imageview1.contentMode = UIViewContentModeScaleAspectFit;
-//            self.topMarginForColVw.constant=44;
-//            self.topSpaceForTable.constant=44;
-//        }
-//        
-//        
-//        else{
-//          imageview1.frame=CGRectMake(0, 0, 200, 40);
-//            imageview1.backgroundColor=[UIColor clearColor];
-//             imageview1.contentMode = UIViewContentModeScaleAspectFit;
-//            self.topMarginForColVw.constant=32;
-//            self.topSpaceForTable.constant=32;
-//            
-//            
-//        }
-//        
-//        NSLog(@"Lanscapse");
-//    }
-//    else if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown )
-//    {
-//        
-//        if (!IS_IPAD)
-//        {
-//             imageview1.frame=CGRectMake(0, 0, 200, 40);
-//             imageview1.contentMode = UIViewContentModeScaleAspectFit;
-//            
-//        }
-//        self.topMarginForColVw.constant=64;
-//        self.topSpaceForTable.constant=64;
-//        
-//        NSLog(@"UIDeviceOrientationPortrait");
-//    }
-//    
-//    
+    //    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation ]== UIDeviceOrientationLandscapeRight)
+    //    {
+    //
+    //
+    //
+    //
+    //        if (IS_IPAD) {
+    //            self.topMarginForColVw.constant=64;
+    //            self.topSpaceForTable.constant=64;
+    //
+    //        }
+    //        else  if ([UIScreen mainScreen].bounds.size.width==736) {
+    //            imageview1.frame=CGRectMake(0, 0, 200, 40);
+    //            imageview1.backgroundColor=[UIColor clearColor];
+    //             imageview1.contentMode = UIViewContentModeScaleAspectFit;
+    //            self.topMarginForColVw.constant=44;
+    //            self.topSpaceForTable.constant=44;
+    //        }
+    //
+    //
+    //        else{
+    //          imageview1.frame=CGRectMake(0, 0, 200, 40);
+    //            imageview1.backgroundColor=[UIColor clearColor];
+    //             imageview1.contentMode = UIViewContentModeScaleAspectFit;
+    //            self.topMarginForColVw.constant=32;
+    //            self.topSpaceForTable.constant=32;
+    //            
+    //            
+    //        }
+    //        
+    //        NSLog(@"Lanscapse");
+    //    }
+    //    else if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown )
+    //    {
+    //        
+    //        if (!IS_IPAD)
+    //        {
+    //             imageview1.frame=CGRectMake(0, 0, 200, 40);
+    //             imageview1.contentMode = UIViewContentModeScaleAspectFit;
+    //            
+    //        }
+    //        self.topMarginForColVw.constant=64;
+    //        self.topSpaceForTable.constant=64;
+    //        
+    //        NSLog(@"UIDeviceOrientationPortrait");
+    //    }
+    //    
+    //    
     
 }
 //

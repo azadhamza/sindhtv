@@ -22,6 +22,7 @@ class Dashboard extends CI_Controller {
      */
     function __construct() {
         parent::__construct();
+        $this->load->model('channels', '', TRUE);
         if (!$this->session->userdata('logged_in')) {
             redirect(base_url());
         }
@@ -29,10 +30,16 @@ class Dashboard extends CI_Controller {
 
     public function index() {
         $data = array();
-        $content = $this->load->view('dashboard/index.php', $data, true);
+        $data['channels'] = $this->channels->get_all_channels();
+        $data = $content = $this->load->view('dashboard/index.php', $data, true);
         $this->load->view('layout', array('content' => $content));
     }
+
+    public function select($id) {
+        $data = array();
+        $data['channel'] = $this->channels->get_all_channel_by_id($id);
+        $this->session->set_userdata('current_channel', $data['channel']);
+        redirect(base_url() . "index.php/admin/dashboard");
+    }
+
 }
-
-
-

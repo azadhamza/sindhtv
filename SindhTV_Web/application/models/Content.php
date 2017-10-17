@@ -21,14 +21,14 @@ Class Content extends CI_Model {
         return $result;
     }
 
-    function get_total_content_by_type($type) {
+    function get_total_content_by_type($type, $channel_id) {
 
         $sql = "SELECT count(*) as count FROM content
                 WHERE content_type_id =
                 (
                         SELECT content_type_id FROM content_type
                         WHERE content = '$type'
-                ) AND is_active=1"; 
+                ) AND is_active=1 AND channel_id= " . $channel_id;
         $query = $this->db->query($sql);
         $result = $query->result_array();
         $query->free_result();
@@ -36,7 +36,7 @@ Class Content extends CI_Model {
     }
 
     function get_content_by_type_api($type) {
-        
+
         $sql = "select c.*,ct.content as content_type_name from content c
                 inner join content_type ct on ct.content_type_id=c.content_type_id 
                 where ct.content = '$type'
@@ -49,7 +49,7 @@ Class Content extends CI_Model {
         return $result;
     }
 
-    function get_content_by_type($type, $page = 0) {
+    function get_content_by_type($type, $page = 0, $channel_id) {
         // $sql = "select * from content
         //     WHERE content_type_id =
         //     (
@@ -60,7 +60,7 @@ Class Content extends CI_Model {
         $sql = "select c.*,ct.content as content_type_name from content c
                 inner join content_type ct on ct.content_type_id=c.content_type_id 
                 where ct.content = '$type'
-                 AND c.is_active = 1";
+                 AND c.is_active = 1 AND channel_id= " . $channel_id;
 
 
         if ($page >= 0) {
@@ -75,9 +75,27 @@ Class Content extends CI_Model {
         return $result;
     }
 
-    public function get_content_data($id)
-    {
+    public function get_content_data($id) {
         $sql = "select * from content where content_id=$id";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        $query->free_result();
+        return $result;
+    }
+
+    public function get_video_by_category($category_id, $channel_id) {
+        $sql = "SELECT content.content_id,title,description,detail_description,`data`,modified_time,`name`,path,category,video_category.id FROM content
+                    LEFT JOIN video_category
+                    ON category_id=id
+                    LEFT JOIN image
+                    ON image.content_id = content.content_id
+                    WHERE content_type_id =
+                    (
+                            SELECT content_type_id FROM content_type
+                            WHERE content = 'videos'
+                    )  AND content.channel_id = $channel_id AND category_id = $category_id 
+
+                    ORDER BY title ";
         $query = $this->db->query($sql);
         $result = $query->result_array();
         $query->free_result();
@@ -129,9 +147,58 @@ Class Content extends CI_Model {
     }
 
     public function delete_content($id, $status) {
-//        return $this->db->delete('content', array('content_id' => $id));
         $this->db->where('content_id', $id);
         $this->db->update('content', array('is_active' => $status));
+    }
+
+    public function change_status($id, $status) {
+        $this->db->where('content_id', $id);
+        $this->db->update('content', array('is_approved' => $status));
+    }
+
+    public function get_all_titles($type, $channel_id) {
+        $sql = "SELECT title FROM content WHERE channel_id = $channel_id AND content_type_id =
+                (
+                        SELECT content_type_id FROM content_type
+                        WHERE content = '$type'
+                )";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        $query->free_result();
+        return $result;
+    }
+
+    public function get_all_news($channel_id) {
+        $sql = "SELECT * FROM content WHERE channel_id = $channel_id AND modified_time  >= DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        $query->free_result();
+        if (!empty($result)) {
+            foreach ($result as $value) {
+                $this->db->where('is_active', 1);
+                $query = $this->db->get_where('image', array('content_id' => $value['content_id']));
+                $image = $query->result_array();
+                $query->free_result();
+
+                $ser_data = unserialize($value['data']);
+                $news[] = array(
+                    'content_id' => $value['content_id'],
+                    'title' => $value['title'],
+                    'modified_time' => $value['modified_time'],
+                    'category' => !empty($ser_data['category']) ? $ser_data['category'] : '',
+                    'description' => $value['description'],
+                    'data' => unserialize($value['data']),
+                    'image' => !empty($image) ? $image[0]['path'] . $image[0]['name'] : ''
+                );
+            }
+            uasort($news, array($this, 'cmp'));
+            return $news;
+        }
+        return $result;
+    }
+
+    private static function cmp($a, $b) {
+        return $a['category'] > $b['category'] ? 1 : -1;
     }
 
 }

@@ -8,47 +8,62 @@ $data = unserialize($news['data']);
         <div class="col-xs-12">
             <p class="lead">News # <?php echo ucfirst($news['content_id']); ?></p>
 
-                <div class="col-xs-6">
-                    <div class="table-responsive">
+            <div class="col-xs-6">
+                <div class="table-responsive">
 
-                        <div class="box box-primary">
+                    <div class="box box-primary">
 
-                            <!-- form start -->
-                            <form name="edit_news" id="club_news" action="<?php echo base_url(); ?>index.php/admin/news/update" method="POST"  enctype="multipart/form-data">
-                                <input name="news[is_submit]" id="is_submit" value="1" type="hidden" />
-                                <input name="news[id]" id="uniqid" value="<?php echo $news['content_id']; ?>" type="hidden" />
-                                <div class="box-body">
+                        <!-- form start -->
+                        <form name="edit_news" id="club_news" action="<?php echo base_url(); ?>index.php/admin/news/update" method="POST"  enctype="multipart/form-data">
+                            <input name="news[is_submit]" id="is_submit" value="1" type="hidden" />
+                            <input name="news[id]" id="uniqid" value="<?php echo $news['content_id']; ?>" type="hidden" />
+                            <div class="box-body">
 
 
 
-                                    <div class="form-group">
-                                        <label>Title</label>
-                                        <input type="text" class="form-control" name="news[title]" placeholder="Enter ..." value="<?php echo $news['title']; ?>">
-                                    </div
-                                    <div class="form-group">
-                                        <label for="news_description">Description</label>
-                                        <textarea class="form-control" id="news_description" name="news[description]" rows="3" placeholder="Enter ..."><?php echo $news['description']; ?></textarea>
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" class="form-control" name="news[title]" placeholder="Enter ..." value="<?php echo $news['title']; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select name="news[data][category]" class="form-control">
+                                        <option value="">Choose a Category:</option>
+                                        <?php foreach ($news_category as $value) { ?>
+                                            <option value="<?php echo $value['id']; ?>"
+                                            <?php
+                                            if ($data['category'] == $value['id']) {
+                                                echo 'selected="selected"';
+                                            }
+                                            ?>
+                                                    ><?php echo $value['category']; ?></option>                                  
+                                                <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="news_description">Description</label>
+                                    <textarea class="form-control" id="news_description" name="news[description]" rows="3" placeholder="Enter ..."><?php echo $news['description']; ?></textarea>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div style="background: #f7f8fa;padding: 50px;">
+
+                                        <input type="file" multiple="multiple" name="userfile[]" id="input2">
+
                                     </div>
-                                
 
-                                    <div class="form-group">
-                                        <div style="background: #f7f8fa;padding: 50px;">
+                                </div><!-- /.box-body -->
 
-                                            <input type="file" multiple="multiple" name="userfile" id="input2">
-
-                                        </div>
-
-                                    </div><!-- /.box-body -->
-                                
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                            </form>
-                        </div>
-
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                        </form>
                     </div>
-                </div>
 
+                </div>
+            </div>
+            </div>
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-header">
@@ -114,7 +129,7 @@ $data = unserialize($news['data']);
                 </div><!-- /.box -->
 
             </div>
-                    
+
         </div>
     </div>
 
