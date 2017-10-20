@@ -100,7 +100,7 @@ public class VideoListChannelsFragment extends Fragment {
 		listChannelId = new ArrayList<String>();
 
 		  topLayoutLive = (RelativeLayout) view.findViewById(R.id.relativeVideoList);
-		if(channelID.equals("29") || channelID.equals("58")){
+		if(channelID.equals("3") || channelID.equals("1")){
 			topLayoutLive.setBackgroundResource(R.drawable.gray_bg);
 		}else{
 			topLayoutLive.setBackgroundResource(R.drawable.orange_bg);
@@ -147,13 +147,13 @@ public class VideoListChannelsFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onConfigurationChanged(newConfig);
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			if(channelID.equals("29") || channelID.equals("58")){
+			if(channelID.equals("3") || channelID.equals("1")){
 				topLayoutLive.setBackgroundResource(R.drawable.gray_bg_land);
 			}else{
 				topLayoutLive.setBackgroundResource(R.drawable.orange_bg_land);
 			}
 		} else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-			if(channelID.equals("29") || channelID.equals("58")){
+			if(channelID.equals("3") || channelID.equals("1")){
 				topLayoutLive.setBackgroundResource(R.drawable.gray_bg);
 			}else{
 				topLayoutLive.setBackgroundResource(R.drawable.orange_bg);

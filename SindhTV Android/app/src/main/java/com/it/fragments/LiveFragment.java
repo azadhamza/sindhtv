@@ -68,7 +68,7 @@ public class LiveFragment extends Fragment {
         imageListenLive = (ImageView)fakeHeader.findViewById(R.id.imageListenLive);
 
           topLayoutLive = (LinearLayout) fakeHeader.findViewById(R.id.topLayoutLive);
-        if(channelID.equals("29") || channelID.equals("58")){
+        if(channelID.equals("3") || channelID.equals("1")){
             topLayoutLive.setBackgroundResource(R.drawable.gray_bg);
         }else{
             topLayoutLive.setBackgroundResource(R.drawable.orange_bg);
@@ -124,13 +124,13 @@ public class LiveFragment extends Fragment {
         // TODO Auto-generated method stub
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            if(channelID.equals("29") || channelID.equals("58")){
+            if(channelID.equals("3") || channelID.equals("1")){
                 topLayoutLive.setBackgroundResource(R.drawable.gray_bg_land);
             }else{
                 topLayoutLive.setBackgroundResource(R.drawable.orange_bg_land);
             }
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            if(channelID.equals("29") || channelID.equals("58")){
+            if(channelID.equals("3") || channelID.equals("1")){
                 topLayoutLive.setBackgroundResource(R.drawable.gray_bg);
             }else{
                 topLayoutLive.setBackgroundResource(R.drawable.orange_bg);

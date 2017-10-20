@@ -199,10 +199,10 @@ public class MainActivity extends AppCompatActivity {
 
         String channel_id = shp.getString("channel_id", "");
 
-        if(channel_id.equals("30")){
+        if(channel_id.equals("2")){
             image_logo.setBackgroundResource(R.drawable.sindhtv);
            // actionBar.setLogo(R.drawable.sindhtv);
-        }else if(channel_id.equals("29")){
+        }else if(channel_id.equals("3")){
             image_logo.setBackgroundResource(R.drawable.sindhtv_news);
             //actionBar.setLogo(R.drawable.sindhtv_news);
         }else{
@@ -239,9 +239,9 @@ public class MainActivity extends AppCompatActivity {
         }
 */
 
-      /*  if(channelID.equals("30")){
+      /*  if(channelID.equals("2")){
             actionBar.setLogo(R.drawable.sindhtv_logo);
-        }else if(channelID.equals("29")){
+        }else if(channelID.equals("3")){
             actionBar.setLogo(R.drawable.sindhtvnews_logo);
         }else{
             actionBar.setLogo(R.drawable.daily_jeejal_logo);
