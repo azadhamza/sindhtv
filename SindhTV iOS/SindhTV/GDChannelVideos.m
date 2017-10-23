@@ -125,22 +125,16 @@
 
     lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"live"];
     
-    
-    //lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@?appid=%ld",[defaults valueForKey:@"channelID"],[[titleNamesArr valueForKey:@"menu_id"]objectAtIndex:pathForReload ],(long)[defaults integerForKey:@"appID"]];
+
     lifelineViewController.urlString=[NSString stringWithFormat:@"%@",[defaults valueForKey:@"url"]];
     lifelineViewController.fromHeadlines=@"fromVideos";
-    
-    
-    
-    // lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%i",[defaults valueForKey:@"channelID"],[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row],[defaults integerForKey:@"appID"]];
+
     lifelineViewController.view.frame =self.mainVw.bounds;
     
     [lifelineViewController willMoveToParentViewController:self];
     [self.mainVw addSubview:lifelineViewController.view];
     [self addChildViewController:lifelineViewController];
     [lifelineViewController didMoveToParentViewController:self];
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"setBoolValue" object:self];
-   // [[NSNotificationCenter defaultCenter] postNotificationName:@"setForVideos" object:self];
     
 }
 -(void)removeCurrentView
@@ -199,11 +193,11 @@
    lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"live"];
     
     
-    lifelineViewController.urlString=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@?appid=%ld",[defaults valueForKey:@"channelID"],[[titleNamesArr valueForKey:@"menu_id"]objectAtIndex:sender.tag ],(long)[defaults integerForKey:@"appID"]];
+    lifelineViewController.urlString=[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/category_video/%@/%@",[[titleNamesArr valueForKey:@"menu_id"]objectAtIndex:sender.tag],[defaults valueForKey:@"channelID"]];
     
-    [defaults setValue:[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@?appid=%ld",[defaults valueForKey:@"channelID"],[[titleNamesArr valueForKey:@"menu_id"]objectAtIndex:pathForReload ],(long)[defaults integerForKey:@"appID"]] forKey:@"url"];
+    [defaults setValue:[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/category_video/%@/%@",[[titleNamesArr valueForKey:@"menu_id"]objectAtIndex:pathForReload ],[defaults valueForKey:@"channelID"]] forKey:@"url"];
     
-    myUrlString=[NSMutableString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@?appid=%ld",[defaults valueForKey:@"channelID"],[[titleNamesArr valueForKey:@"menu_id"]objectAtIndex:sender.tag ],(long)[defaults integerForKey:@"appID"]];
+    myUrlString=[NSMutableString stringWithFormat:@"http://sindhtv.tv/index.php/api/category_video/%@/%@",[[titleNamesArr valueForKey:@"menu_id"]objectAtIndex:sender.tag ],[defaults valueForKey:@"channelID"]];
     lifelineViewController.fromHeadlines=@"fromVideos";
   
     lifelineViewController.view.frame =self.mainVw.bounds;

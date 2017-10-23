@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeVideoListHealine"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@android:color/background_light">
+
+    <RelativeLayout
+        android:id="@+id/relativeTop"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
+
+        <ListView
+            android:id="@+id/listVideoChannelListHealine"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:divider="#00000000"
+            android:dividerHeight="2dp" >
+        </ListView>
+
+        <ProgressBar
+            android:id="@+id/progressVideoChannelListHealine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <TextView android:id="@+id/textNothingHereHeadLines"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Nothing to show here"
+                  android:visibility="gone"
+                  android:textStyle="bold"
+                  android:textSize="25dp"
+                  android:textColor="#ffffff"
+                  android:layout_centerInParent="true"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/fragmentReplaceHealine"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"></LinearLayout>
+
+
+
+
+</RelativeLayout>

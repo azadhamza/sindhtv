@@ -188,7 +188,8 @@
                             JSONObjectWithData:urlData
                             options:NSJSONReadingMutableContainers
                             error:nil];
-                if ([[jsonData objectForKey:@"items"] isKindOfClass:[NSArray class]])
+                NSLog(@"Json Data : %@",[jsonData objectForKey:@"items"]);
+                if ([jsonData objectForKey:@"items"])
                 {
                     titleNamesArr=[[NSMutableArray alloc]init];
                     titleNamesArr=[jsonData objectForKey:@"items"];
@@ -203,8 +204,8 @@
                     
                     if (titleNamesArr )
                     {
-                        videoUrl=[[titleNamesArr valueForKey:@"webview_url"]objectAtIndex:0];
-                        audioUrl=[[titleNamesArr valueForKey:@"audio_url"]objectAtIndex:0];
+                        videoUrl=[titleNamesArr valueForKey:@"webview_url"];
+                        //audioUrl=[[titleNamesArr valueForKey:@"audio_url"]objectAtIndex:0];
 
                         
                         
