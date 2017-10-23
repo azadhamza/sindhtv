@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>News  - <?php echo $news[0]['title']; ?></title>
+        <title>About</title>
         <link rel="stylesheet" id="lane-css"  href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,700|Roboto:400,500,700&subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic" type="text/css" media="all" />
 
     </head>

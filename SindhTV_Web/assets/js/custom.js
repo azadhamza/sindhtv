@@ -9,10 +9,16 @@ $(document).ready(function () {
         if (sel == "episode") {
             $(".datepicker").datepicker("destroy");
         } else if (sel == "date") {
-            jQuery(".datepicker").datepicker("enable");
+            jQuery(".datepicker").datepicker({
+                format: 'dd/mm/yyyy'
+            });
         }
     }
-    
+    jQuery(".predatepicker").datepicker({
+        format: 'dd/mm/yyyy'
+    });
+
+
     datepicker_on_change(jQuery(".episode_date:checked").val());
 
     jQuery('.video').on('change', function () {

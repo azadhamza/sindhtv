@@ -25,8 +25,7 @@
                                 <label>Category</label>
                                 <select name="news[data][category]" class="form-control">
                                     <option value="">Choose a Category:</option>
-                                    <?php
-                                    foreach ($news_category as $value) { ?>
+                                    <?php foreach ($news_category as $value) { ?>
                                         <option value="<?php echo $value['id']; ?>"><?php echo $value['category']; ?></option>                                  
                                     <?php } ?>
                                 </select>
