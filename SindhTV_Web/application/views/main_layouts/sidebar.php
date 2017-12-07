@@ -100,6 +100,15 @@
                     </span>
                 </a>
             </li>
+
+            <li class="<?php echo ($controller == 'user_uploads') ? 'active' : ''; ?> ">
+                <a href="/index.php/admin/user_uploads">
+                    <i class="fa fa-dashboard"></i> <span>User Uploads</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+            </li>
             <!--        <li class="treeview">
                         <a href="#">
                             <i class="fa fa-files-o"></i>

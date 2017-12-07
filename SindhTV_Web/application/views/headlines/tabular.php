@@ -20,7 +20,8 @@
                     <table class="table table-hover">
                         <tr>
                             <th>#</th>
-                            <th>Title</th>
+                            <th>Title(Date)</th>
+                            <th>Time</th>
                             <th>Description</th>
                             <th>Headline Link</th>
                             <th>Status</th>
@@ -40,7 +41,8 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $headlines['content_id']; ?></td>
-                                    <td><?php echo $headlines['title']; ?></td>                                
+                                    <td><?php echo $headlines['title']; ?></td> 
+                                     <td><?php echo $headlines['detail_description']; ?></td> 
                                     <td><?php echo(strlen($headlines['description']) > 100) ? substr($headlines['description'], 0, 97) . '...' : $headlines['description']; ?></td>
                                     <td><a href="<?php echo$link; ?>" target="_blank"><i class="fa fa-television"></i></a></td>
                                     <td>

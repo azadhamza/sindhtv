@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   tools:context=".MainActivity" >
+   
+    <RelativeLayout android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true">
+
+   
+
+   <ImageView
+   		android:id="@+id/micImage"
+      	android:layout_width="60dp"
+      	android:layout_height="60dp"
+      	android:layout_below="@+id/text1"
+      	android:layout_centerHorizontal="true"
+
+      	android:layout_marginTop="20dp"
+      	android:src="@drawable/record" />
+   
+     <Chronometer
+       android:id="@+id/chronometer1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+
+	   android:layout_marginBottom="10dp"
+       android:text="Chronometer" />
+   
+   <LinearLayout  android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:layout_marginTop="10dp"
+   		android:layout_below="@+id/micImage"
+   		android:id="@+id/linear1"
+				  android:layout_marginBottom="10dp"
+   		android:layout_centerInParent="true"
+   		android:orientation="horizontal" >
+
+	   <Button
+	      	android:id="@+id/start"
+	      	android:layout_width="wrap_content"
+	      	android:layout_height="wrap_content"
+			android:background="@drawable/custom_edit"
+	      	android:text="START" />
+	
+	   <Button
+	      	android:id="@+id/stop"
+	      	android:layout_width="wrap_content"
+	      	android:layout_height="wrap_content"
+			android:background="@drawable/custom_edit"
+	      	android:layout_marginLeft="10dp"
+	      	android:enabled="false"
+	      	android:text="STOP" />
+   
+   </LinearLayout>
+   
+   <LinearLayout  android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:layout_marginTop="10dp"
+   		android:layout_below="@+id/linear1"
+   		android:id="@+id/linear2"
+   		android:layout_centerHorizontal="true"
+   		android:orientation="horizontal" >
+
+	   <Button
+		   android:id="@+id/done"
+		   android:layout_width="wrap_content"
+		   android:layout_height="wrap_content"
+		   android:background="#3f51b5"
+		   android:textColor="#ffffff"
+		   android:textStyle="bold"
+		   android:text="DONE" />
+
+	 <!--  <Button
+	      	android:id="@+id/play"
+	      	android:layout_width="wrap_content"
+	      	android:layout_height="wrap_content"
+	      	android:enabled="false"
+	      	android:text="play" />
+	   
+	   <Button
+	      	android:id="@+id/stopPlay"
+	      	android:layout_width="wrap_content"
+	      	android:layout_height="wrap_content"
+	      	android:enabled="false"
+	      	android:layout_marginLeft="10dp"
+	      	android:text="stop playing" />-->
+	</LinearLayout>
+
+ 
+ 
+</RelativeLayout>
+</RelativeLayout>

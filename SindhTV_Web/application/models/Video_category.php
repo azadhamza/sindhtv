@@ -19,6 +19,14 @@ Class Video_category extends CI_Model {
         return $result;
     }
 
+    public function get_category_name($category_id) {
+        $sql = "select category from video_category where id=" . $category_id;
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        $query->free_result();
+        return $result[0]['category'];
+    }
+
 }
 
 ?>
