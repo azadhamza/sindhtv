@@ -116,34 +116,7 @@
     NSLog(@"USE PROFILE IMAGE URL IN ViewDidLoad=>%@",url);
     [cell.Channel setBackgroundImage:[UIImage imageNamed:[ChannelImagesArr objectAtIndex:indexPath.row] ] forState:UIControlStateNormal];
    
-//    [self downloadImageWithURL:url completionBlock:^(BOOL succeeded, UIImage *image) {
-//        if (succeeded) {
-//            
-//            if (image==nil) {
-//                [cell.Channel setBackgroundImage:[UIImage imageNamed:@"sindhTv" ] forState:UIControlStateNormal];
-//            }
-//            else{
-//                [cell.Channel setBackgroundImage:image forState:UIControlStateNormal];
-//                
-////                cell.Channel.layer.cornerRadius = cell.Channel.frame.size.width/2; // 60 this value vary as per your desire
-////                cell.Channel.clipsToBounds = YES;
-//                
-//            }
-//            // save image in
-//        }
-//        else
-//        {
-//            [cell.Channel setBackgroundImage:[UIImage imageNamed:@"sindhTv" ] forState:UIControlStateNormal];
-//        }
-//        
-//    }];
-    
-    
-    
-    
-    //[cell.Channel setBackgroundImage:[UIImage imageNamed:@"sindhTv" ] forState:UIControlStateNormal];
-    
-    cell.Channel.tag=indexPath.row;
+    cell.Channel.tag=indexPath.row +1;
     
     NSLog(@"indexpath is %li",(long)cell.Channel.tag);
     
@@ -217,9 +190,9 @@
     
     ViewController *vc=[self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
     
-    if (sender.tag==0)
+    if (sender.tag==1)
     {
-        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
+        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag-1];
         [defaults setValue:vc.channelID forKey:@"channelID"];
 
         
@@ -229,9 +202,12 @@
         [ defaults setValue:@"sindhTvIcon" forKey:@"applogo"];
         [ defaults setObject:imageData forKey:@"bgImg"];
         [defaults synchronize];
+        //channel_thumb
+        [defaults setObject:[[channelArr valueForKey:@"channel_thumb"] objectAtIndex:sender.tag-1] forKey:@"channelImage"];
+        
 
     }
-    else if (sender.tag==1)
+    else if (sender.tag==2)
     {
 //    sindhtvnews_bg
         vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
@@ -242,19 +218,24 @@
        
         [ defaults setObject:imageData forKey:@"bgImg"];
         [defaults synchronize];
+        //channel_thumb
+        [defaults setObject:[[channelArr valueForKey:@"channel_thumb"] objectAtIndex:sender.tag] forKey:@"channelImage"];
+        
 
     }
     else{
-        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
+        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag-2];
         [defaults setValue:vc.channelID forKey:@"channelID"];
         [ defaults setValue:@"jeejalIcon" forKey:@"applogo"];
         [defaults synchronize];
+        
+        //channel_thumb
+        [defaults setObject:[[channelArr valueForKey:@"channel_thumb"] objectAtIndex:sender.tag-2] forKey:@"channelImage"];
+        
 
     
     }
-    //channel_thumb
-    [defaults setObject:[[channelArr valueForKey:@"channel_thumb"] objectAtIndex:sender.tag] forKey:@"channelImage"];
-    
+
     [defaults synchronize];
     
     if ([orientation isEqualToString:@"Lanscape"])

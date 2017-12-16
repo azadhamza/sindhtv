@@ -805,8 +805,9 @@
         NSString * post=[NSString stringWithFormat:@""];
         
         
+        defaults = [NSUserDefaults standardUserDefaults];
         
-        getListUrl=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/menu_config"]];
+        getListUrl=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/menu_config/%@",channelID]];
         
         
         NSLog(@"URL ====== %@",getListUrl);
