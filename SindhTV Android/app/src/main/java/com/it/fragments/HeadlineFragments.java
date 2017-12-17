@@ -204,6 +204,8 @@ public class HeadlineFragments  extends Fragment {
 
                 JSONArray jsonArrayMian = jsonObjectRoot.getJSONArray("items");
 
+                listDataHeader.clear();
+
                 for (int j = 0; j < jsonArrayMian.length(); j++) {
 
                     JSONObject jsonobject2 = jsonArrayMian.getJSONObject(j);
@@ -416,9 +418,13 @@ public class HeadlineFragments  extends Fragment {
             // Log.e("Child====", "" + currentList.get(position)._smallTitle);
 
             textVideo.setText(currentList.get(position)._smallTitle);
-            Picasso.with(getActivity())
-                    .load(currentList.get(position)._thumb)
-                    .placeholder(R.drawable.black).into(imageVideoAccount);
+
+            if (currentList.get(position)._thumb != null && !currentList.get(position)._thumb.isEmpty()) {
+                Picasso.with(getActivity())
+                        .load(currentList.get(position)._thumb)
+                        .placeholder(R.drawable.black)
+                        .into(imageVideoAccount);
+            }
 
             textTime.setText(currentList.get(position)._duration);
             //	textVideoBy.setText(currentList.get(position)._userName);

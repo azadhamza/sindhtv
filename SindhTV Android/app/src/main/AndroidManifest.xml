@@ -59,7 +59,7 @@
         </activity>
 
 
-        <activity android:name=".PlayerMain" android:screenOrientation="portrait">
+        <activity android:name=".PlayerMain">
         </activity>
 
         <activity android:name=".UserUploads" android:windowSoftInputMode="stateHidden" android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"

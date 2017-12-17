@@ -131,7 +131,7 @@ public class MainCategoriesAdapter extends BaseExpandableListAdapter {
 				.findViewById(R.id.textVideoBy);
 
 		textVideo.setText(childText);
-		Picasso.with(_context).load(childImage).into(imageVideoAccount);
+		Picasso.with(_context).load(childImage).placeholder(R.drawable.black).into(imageVideoAccount);
 
 		textTime.setText(childDuration);
 		textVideoBy.setText(childUsername);

@@ -408,7 +408,10 @@ public class VideoListChannelsFragment extends Fragment {
 
 			textVideo.setText(currentList.get(position)._smallTitle);
 			String thumbUrl = currentList.get(position)._thumb;
-			if(!thumbUrl.isEmpty()) {
+
+			if (thumbUrl.isEmpty()) {
+				imageVideoAccount.setImageResource(R.drawable.black);
+			} else {
 				Picasso.with(getActivity())
 						.load(thumbUrl)
 						.placeholder(R.drawable.black)

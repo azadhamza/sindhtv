@@ -297,7 +297,9 @@ public class VideosFragment extends Fragment {
 
                     } else {
 
-                        Picasso.with(getActivity()).load(p).resize(100, 100)
+                        Picasso.with(getActivity())
+                                .load(p).resize(100, 100)
+                                .placeholder(R.drawable.black)
                                 .into(roundImage);
                     }
                 }

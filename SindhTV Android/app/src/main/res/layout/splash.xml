@@ -20,7 +20,7 @@
         android:textStyle="bold"
         android:textSize="14dp"
         android:textColor="#ffffff"
-        android:text="Developed by Eboundservices"/>
+        android:text="Designed by Hanif Iqbal Manjothi"/>
    
  
 </RelativeLayout>
