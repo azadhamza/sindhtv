@@ -188,7 +188,7 @@
                                                          delegate:self
                                                 cancelButtonTitle:@"Cancel"
                                            destructiveButtonTitle:nil
-                                                otherButtonTitles:@"Upload Video",@"Upload Image",@"Upload Audio", nil];
+                                                otherButtonTitles:@"Upload Video", nil];
     //    }
     //    else
     //    {
@@ -288,7 +288,7 @@
 -(void)showAlertView
 {
     
-    UIAlertView *alrtVw=[[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload Video",@"Upload Image",@"Upload Audio", nil];
+    UIAlertView *alrtVw=[[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload Video", nil];
     alrtVw.tag=10000;
     [alrtVw show];
     
