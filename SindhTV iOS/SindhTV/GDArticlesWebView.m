@@ -324,12 +324,12 @@
                 
                 NSLog(@"Notification Data %@",jsonData);
                 
-                if ([epaperArr count]>=1)
+               // if ([epaperArr count]>=1)
                     
-                {
-                    urlString=[[epaperArr objectAtIndex:0] valueForKey:@"webview_url"];
+              //  {
+                    //urlString=[[epaperArr objectAtIndex:0] valueForKey:@"webview_url"];
                     
-                    if ([urlString isEqualToString:@""])
+                    if ([epaperUrl isEqualToString:@""])
                     {
                         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"Nothing to show here" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                         [alert show];
@@ -341,7 +341,7 @@
                     {
                         
                         
-                        Finalurl = [NSURL URLWithString:urlString];
+                        Finalurl = [NSURL URLWithString:epaperUrl];
                         
                         NSURLRequest *requestObj = [NSURLRequest requestWithURL:Finalurl];
                         
@@ -354,7 +354,7 @@
                         
                         [self.ArticlesWebVw loadRequest:requestObj];
                     }
-                }
+                //}
             }
         });
     });

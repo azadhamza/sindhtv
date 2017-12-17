@@ -18,7 +18,10 @@ Class Stvsettings extends CI_Model {
         $query = $this->db->get('settings', array('key' => $key, 'channel_id' => $channel_id));
         $result = $query->result_array();
         $query->free_result();
-        return$result[0];
+        if (!empty($result))
+            return$result[0];
+        else
+            return '';
     }
 
 }

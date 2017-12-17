@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yTX-np-M54">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yTX-np-M54">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -620,8 +621,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCn-pE-xsU">
-                                                    <rect key="frame" x="20" y="15" width="110" height="110"/>
+                                                    <rect key="frame" x="20" y="4" width="110" height="110"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="lCn-pE-xsU" secondAttribute="height" multiplier="1:1" id="xeO-yh-hi3"/>
+                                                    </constraints>
                                                     <state key="normal">
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -629,13 +633,10 @@
                                                         <action selector="videosBtnAction:" destination="Wvs-ap-f6H" eventType="touchUpInside" id="ShS-09-Bu5"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Baf-cc-cGw">
-                                                    <rect key="frame" x="75" y="135" width="0.0" height="25"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Baf-cc-cGw">
+                                                    <rect key="frame" x="75" y="114" width="0.0" height="46"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="oTH-Qd-jjW"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -643,10 +644,12 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="lCn-pE-xsU" firstAttribute="top" secondItem="irI-mx-Meb" secondAttribute="top" constant="15" id="5Yl-cV-nai"/>
-                                            <constraint firstAttribute="bottom" secondItem="lCn-pE-xsU" secondAttribute="bottom" constant="35" id="I7j-us-lzX"/>
+                                            <constraint firstItem="lCn-pE-xsU" firstAttribute="top" secondItem="irI-mx-Meb" secondAttribute="top" constant="4" id="5Yl-cV-nai"/>
+                                            <constraint firstAttribute="bottom" secondItem="Baf-cc-cGw" secondAttribute="bottom" id="8BJ-Tv-SJB"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Baf-cc-cGw" secondAttribute="trailing" id="HK0-6x-Oln"/>
                                             <constraint firstItem="Baf-cc-cGw" firstAttribute="centerX" secondItem="lCn-pE-xsU" secondAttribute="centerX" id="TcB-0y-OvP"/>
-                                            <constraint firstItem="Baf-cc-cGw" firstAttribute="top" secondItem="lCn-pE-xsU" secondAttribute="bottom" constant="10" id="ktB-SK-XEo"/>
+                                            <constraint firstItem="Baf-cc-cGw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="irI-mx-Meb" secondAttribute="leading" id="ecq-EA-j2F"/>
+                                            <constraint firstItem="Baf-cc-cGw" firstAttribute="top" secondItem="lCn-pE-xsU" secondAttribute="bottom" id="ktB-SK-XEo"/>
                                             <constraint firstAttribute="trailing" secondItem="lCn-pE-xsU" secondAttribute="trailing" constant="20" id="ra8-kE-EPc"/>
                                             <constraint firstItem="lCn-pE-xsU" firstAttribute="leading" secondItem="irI-mx-Meb" secondAttribute="leading" constant="20" id="w2K-mc-Zr9"/>
                                         </constraints>
@@ -1169,7 +1172,7 @@
                                                     </cells>
                                                 </collectionView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75V-SQ-i70">
-                                                    <rect key="frame" x="10" y="0.0" width="59" height="30"/>
+                                                    <rect key="frame" x="10" y="0.0" width="57" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="47N-Ya-tz1"/>

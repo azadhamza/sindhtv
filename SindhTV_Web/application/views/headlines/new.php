@@ -18,18 +18,71 @@
 
 
                             <div class="form-group">
-                                <label>Title</label>
-                                <input type="text" class="form-control" name="headlines[title]"  autocomplete="off" list="headlinetitle" placeholder="Enter ..." value="">
-                                <datalist id="headlinetitle">
-                                    <?php foreach ($titles as $value) { ?>
-                                        <option value="<?php echo $value['title']; ?>">                                        
-                                        <?php } ?>
+                                <label>Title(Date)</label>
+                                <input type="text" class="form-control predatepicker" name="headlines[title]"  autocomplete="off" list="headlinetitle" placeholder="Enter ..." value="">
+<!--                                <datalist id="headlinetitle">
+                                    <?php // foreach ($titles as $value) { ?>
+                                        <option value="<?php // echo $value['title']; ?>">                                        
+                                        <?php // } ?>
+                                </datalist>-->
+                            </div>
+
+                            <div class="form-group">
+                                <label>Time</label>
+                                <input type="text" class="form-control timepicker" list="time" name="headlines[detail_description]"  autocomplete="off"  placeholder="Enter ..." value="">
+                                <datalist id="time">
+                                    <option value="12:00am">
+                                    <option value="12:30am">
+                                    <option value="1:00am">
+                                    <option value="1:30am">
+                                    <option value="2:00am">
+                                    <option value="2:30am">
+                                    <option value="3:00am">
+                                    <option value="3:30am">
+                                    <option value="4:00am">
+                                    <option value="4:30am">
+                                    <option value="5:00am">
+                                    <option value="5:30am">
+                                    <option value="6:00am">
+                                    <option value="6:30am">
+                                    <option value="7:00am">
+                                    <option value="7:30am">
+                                    <option value="8:00am">
+                                    <option value="8:30am">
+                                    <option value="9:00am">
+                                    <option value="9:30am">
+                                    <option value="10:00am">
+                                    <option value="10:30am">
+                                    <option value="11:00am">
+                                    <option value="11:30am">
+                                    <option value="12:00pm">
+                                    <option value="12:30pm">
+                                    <option value="1:00pm">
+                                    <option value="1:30pm">
+                                    <option value="2:00pm">
+                                    <option value="2:30pm">
+                                    <option value="3:00pm">
+                                    <option value="3:30pm">
+                                    <option value="4:00pm">
+                                    <option value="4:30pm">
+                                    <option value="5:00pm">
+                                    <option value="5:30pm">
+                                    <option value="6:00pm">
+                                    <option value="6:30pm">
+                                    <option value="7:00pm">
+                                    <option value="7:30pm">
+                                    <option value="8:00pm">
+                                    <option value="8:30pm">
+                                    <option value="9:00pm">
+                                    <option value="9:30pm">
+                                    <option value="10:00pm">
+                                    <option value="10:30pm">
+                                    <option value="11:00pm">
+                                    <option value="11:30pm">
                                 </datalist>
                             </div>
 
-                            
 
-                            
 
                             <div class="form-group">
                                 <label for="headlines_description">Description</label>
@@ -61,8 +114,8 @@
 
                                 </div>
                             </div> 
-                            
-                            
+
+
 
                         </div><!-- /.box-body -->
 

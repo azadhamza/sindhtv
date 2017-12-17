@@ -151,7 +151,8 @@
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.backgroundColor=[UIColor clearColor];
-   // cell.titleHeader.text=[[titleNamesArr valueForKey:@"date" ] objectAtIndex:indexPath.section];
+    
+    cell.titleHeader.text=[[titleNamesArr objectAtIndex:indexPath.section] valueForKey:@"date"];
     cell.titleHeader.font = [UIFont fontWithName:@"Arial-BoldMT" size:16];
     cell.titleHeader.textColor=[UIColor whiteColor];
     cell.moreBtn.hidden=YES;

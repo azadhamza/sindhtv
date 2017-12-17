@@ -21,10 +21,13 @@ $data = unserialize($headlines['data']);
                                 </td>
                             </tr>
                             <tr>
-                                <th>Title:</th>
+                                <th>Title(Date):</th>
                                 <td><?php echo $headlines['title']; ?></td>
                             </tr>
-                      
+                            <tr>
+                                <th>Time:</th>
+                                <td><?php echo $headlines['detail_description']; ?></td>
+                            </tr>
                             <tr>
                                 <th>Description</th>
                                 <td><?php echo $headlines['description']; ?></td>

@@ -597,6 +597,7 @@
             
             lifelineViewController.urlString=[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/video_categories/%@",[defaults valueForKey:@"channelID"]];
             
+            
             lifelineViewController.view.frame =self.mainVw.bounds;
             [lifelineViewController willMoveToParentViewController:self];
             [self.mainVw addSubview:lifelineViewController.view];
@@ -804,8 +805,9 @@
         NSString * post=[NSString stringWithFormat:@""];
         
         
+        defaults = [NSUserDefaults standardUserDefaults];
         
-        getListUrl=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/menu_config"]];
+        getListUrl=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/menu_config/%@",channelID]];
         
         
         NSLog(@"URL ====== %@",getListUrl);
@@ -1158,8 +1160,8 @@
         firstTime=NO;
         GDArticlesWebView *lifelineViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"articlesWebVw"];
         
-        
-        lifelineViewController.epaperUrl=[NSString stringWithFormat:@"http://poovee.net/webservices/packagelist/%@/%@/?appid=%li",[defaults valueForKey:@"channelID"],[[titleNamesArr valueForKey:@"menu_id"] objectAtIndex:indexPath.row],(long)[defaults integerForKey:@"appID"]];
+        NSLog(@"response Info %@",[jsonData valueForKey:@"about_url"]);
+        lifelineViewController.epaperUrl=[NSString stringWithFormat:@"%@", [jsonData valueForKey:@"about_url"]];
         lifelineViewController.fromEpaper=@"FROMEPAPER";
         lifelineViewController.about=@"ABOUT";
         
@@ -1192,7 +1194,7 @@
         
         
         lifelineViewController.epaperUrl=[NSString stringWithFormat:@"http://www.thesindh.tv/entertainment/contact/appcontact.html"];
-        lifelineViewController.contactusUrl=[NSString stringWithFormat:@"http://www.thesindh.tv/program.html"];
+        lifelineViewController.contactusUrl=[NSString stringWithFormat:@"%@", [jsonData valueForKey:@"contact_url"]];
         lifelineViewController.isfromPrograms=YES;
         
         

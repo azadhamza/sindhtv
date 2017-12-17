@@ -84,18 +84,35 @@ Class Content extends CI_Model {
     }
 
     public function get_video_by_category($category_id, $channel_id) {
-        $sql = "SELECT content.content_id,title,description,detail_description,`data`,modified_time,`name`,path,category,video_category.id FROM content
+        $sql = "SELECT content.content_id,title,description,detail_description,`data`,modified_time,category,video_category.id, 
+                    (SELECT CONCAT(`path`,`name`) FROM  image WHERE is_thumb = 0  AND content_id  =  content.content_id limit 0,1) as video,
+                    (SELECT CONCAT(`path`,`name`) FROM  image WHERE is_thumb = 1  AND content_id  =  content.content_id limit 0,1) as thumb            
+                    FROM content
                     LEFT JOIN video_category
                     ON category_id=id
-                    LEFT JOIN image
-                    ON image.content_id = content.content_id
+                  
                     WHERE content_type_id =
                     (
                             SELECT content_type_id FROM content_type
                             WHERE content = 'videos'
-                    )  AND content.channel_id = $channel_id AND category_id = $category_id 
+                    )  AND content.channel_id = $channel_id AND category_id = $category_id
 
                     ORDER BY title ";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        $query->free_result();
+        return $result;
+    }
+
+    public function get_headlines($channel_id) {
+        $sql = "SELECT *,(SELECT CONCAT(`path`,`name`) FROM  image WHERE is_thumb = 0  AND content_id  =  content.content_id limit 0,1) as video,
+                (SELECT CONCAT(`path`,`name`) FROM  image WHERE is_thumb = 1  AND content_id  =  content.content_id limit 0,1) as thumb
+                 FROM content 
+                WHERE content_type_id =
+                 (SELECT content_type_id FROM content_type WHERE content = 'headlines' )
+
+                AND channel_id = $channel_id
+                ORDER BY title ";
         $query = $this->db->query($sql);
         $result = $query->result_array();
         $query->free_result();
@@ -133,6 +150,7 @@ Class Content extends CI_Model {
     }
 
     public function add_content($data, $type) {
+//                var_dump($data); exit;
         $this->db->select('content_type_id');
         $this->db->from('content_type');
         $this->db->where('content', $type);

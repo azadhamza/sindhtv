@@ -453,8 +453,8 @@
     
     if (IS_IPHONE_6)
     {
-        retval.height = 180;
-        retval.width = 170;
+        retval.height = 170;
+        retval.width = 160;
     }
     else if (IS_IPHONE_6P)
     {

@@ -22,6 +22,8 @@
         <link rel="stylesheet" href="<?php echo asset_url('dist/css/skins/_all-skins.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo asset_url('filer/css/jquery.filer-dragdropbox-theme.css'); ?>">
         <link rel="stylesheet" href="<?php echo asset_url('filer/css/jquery.filer.css'); ?>">
+        <link rel="stylesheet" href="<?php echo asset_url('css/bootstrap-datetimepicker.min.css'); ?>">
+        
         <!-- Morris chart -->
         <link rel="stylesheet" href="<?php echo asset_url('bower_components/morris.js/morris.css'); ?>">
         <!-- jvectormap -->
@@ -32,6 +34,10 @@
         <link rel="stylesheet" href="<?php echo asset_url('bower_components/bootstrap-daterangepicker/daterangepicker.css'); ?>">
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="<?php echo asset_url('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>">
+<!--        <link rel="stylesheet" href="<?php // echo asset_url('plugins/timepicker/bootstrap-timepicker.min.css'); ?>">
+        <link rel="stylesheet" href="<?php // echo asset_url('plugins/timepicker/bootstrap-timepicker.css'); ?>">-->
+
+        
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -279,7 +285,18 @@
         <script src="<?php echo asset_url('bower_components/jquery-knob/dist/jquery.knob.min.js'); ?>"></script>
         <!-- daterangepicker -->
         <script src="<?php echo asset_url('bower_components/moment/min/moment.min.js'); ?>"></script>
+                <script src="<?php echo asset_url('js/bootstrap-datetimepicker.min.js'); ?>"></script>
+        
         <script src="<?php echo asset_url('bower_components/bootstrap-daterangepicker/daterangepicker.js'); ?>"></script>
+
+
+        
+<!--        
+        <script src="<?php // echo asset_url('plugins/timepicker/bootstrap-timepicker.js'); ?>"></script>
+
+        <script src="<?php // echo asset_url('plugins/timepicker/bootstrap-timepicker.min.js'); ?>"></script>
+-->
+
         <!-- datepicker -->
         <script src="<?php echo asset_url('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'); ?>"></script>
         <!-- Bootstrap WYSIHTML5 -->
@@ -298,8 +315,12 @@
 
         <script src="<?php echo asset_url('js/custom.js'); ?>"></script>
 
-<!--        <script src="<?php // echo asset_url('filer/js/jquery.filer.js'); ?>"></script>
-        <script src="<?php // echo asset_url('filer/js/jquery.filer.min.js'); ?>"></script>-->
+
+        
+        
+        
+<!--        <script src="<?php // echo asset_url('filer/js/jquery.filer.js');   ?>"></script>
+        <script src="<?php // echo asset_url('filer/js/jquery.filer.min.js');   ?>"></script>-->
 
 
     </body>
