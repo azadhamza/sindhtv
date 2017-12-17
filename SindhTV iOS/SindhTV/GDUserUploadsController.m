@@ -757,7 +757,7 @@
                            
                            
                            
-                           NSString *urlString = [NSString stringWithFormat:@"http://poovee.net/webservices/appfeedback/2/%@?",[defaults valueForKey:@"channelID"]];
+                           NSString *urlString = [NSString stringWithFormat:@"http://sindhtv.tv/index.php/api/user_upload/%@?",[defaults valueForKey:@"channelID"]];
                            
                            
                            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -787,7 +787,7 @@
                            //phone number
                            
                            [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                           [body appendData:[@"Content-Disposition: form-data; name=\"phone\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                           [body appendData:[@"Content-Disposition: form-data; name=\"phone_number\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                            [body appendData:[[NSString stringWithFormat:@"%@",self.phoneTextField.text] dataUsingEncoding:NSUTF8StringEncoding]];
                            // [body appendData:[userID dataUsingEncoding:NSUTF8StringEncoding]];
                            [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -797,7 +797,7 @@
                            //////// feedback
                            
                            [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                           [body appendData:[@"Content-Disposition: form-data; name=\"message\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                           [body appendData:[@"Content-Disposition: form-data; name=\"description\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                            [body appendData:[[NSString stringWithFormat:@"%@",self.feedBackTxtVw.text] dataUsingEncoding:NSUTF8StringEncoding]];
                            // [body appendData:[userID dataUsingEncoding:NSUTF8StringEncoding]];
                            [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -821,7 +821,7 @@
                                
                                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
                                
-                               [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@.mp4\"\r\n", filename1] dataUsingEncoding:NSUTF8StringEncoding]];
+                               [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.mp4\"\r\n", filename1] dataUsingEncoding:NSUTF8StringEncoding]];
                                [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                                [body appendData:[NSData dataWithData:[defaults objectForKey:@"uploadData"]]];
                                
@@ -841,7 +841,7 @@
                                
                                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
                                
-                               [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"image\"; filename=\"%@.png\"\r\n", filename1] dataUsingEncoding:NSUTF8StringEncoding]];
+                               [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.png\"\r\n", filename1] dataUsingEncoding:NSUTF8StringEncoding]];
                                [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                                [body appendData:[NSData dataWithData:[defaults objectForKey:@"uploadData"]]];
                                
@@ -854,7 +854,7 @@
                                filename1=@"User_audio";
                                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
                                
-                               [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"audio\"; filename=\"%@.m4a\"\r\n", filename1] dataUsingEncoding:NSUTF8StringEncoding]];
+                               [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.m4a\"\r\n", filename1] dataUsingEncoding:NSUTF8StringEncoding]];
                                [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                                [body appendData:[NSData dataWithData:[defaults objectForKey:@"uploadData"]]];
                                
@@ -890,7 +890,7 @@
                                               });
                                               
                                               
-                                              if ([[jsonData objectForKey:@"type"] isEqualToString:@"1"]) {
+                                              if ([[jsonData objectForKey:@"type"] isEqualToNumber:@0]) {
                                                   UIAlertView *alertImageSend = [[UIAlertView alloc] initWithTitle:[jsonData objectForKey:@"text"]
                                                                                                            message:[jsonData objectForKey:@"response"]
                                                                                                           delegate:nil

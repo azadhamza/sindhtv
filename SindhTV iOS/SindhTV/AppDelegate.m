@@ -22,7 +22,7 @@
     splashImageView.frame=[[UIScreen mainScreen] bounds];
     UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0 , splashImageView.frame.size.height-50, splashImageView.frame.size.width, 35)];
     
-    lbl.text=@"Developed by Eboundservices";
+    lbl.text=@"Designed by Hanif Iqbal Manjothi";
     lbl.textColor=[UIColor whiteColor];
     lbl.textAlignment=NSTextAlignmentCenter;
     [splashImageView addSubview:lbl];

@@ -192,7 +192,7 @@
     
     if (sender.tag==1)
     {
-        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag-1];
+        vc.channelID=@"2";
         [defaults setValue:vc.channelID forKey:@"channelID"];
 
         
@@ -210,7 +210,7 @@
     else if (sender.tag==2)
     {
 //    sindhtvnews_bg
-        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag];
+        vc.channelID=@"3";
         [defaults setValue:vc.channelID forKey:@"channelID"];
         NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"sindhtvnews_bg"], 1.0);
         
@@ -224,7 +224,7 @@
 
     }
     else{
-        vc.channelID=[[channelArr valueForKey:@"channel_id"] objectAtIndex:sender.tag-2];
+        vc.channelID=@"1";
         [defaults setValue:vc.channelID forKey:@"channelID"];
         [ defaults setValue:@"jeejalIcon" forKey:@"applogo"];
         [defaults synchronize];
