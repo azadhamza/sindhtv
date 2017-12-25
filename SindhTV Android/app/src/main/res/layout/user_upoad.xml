@@ -57,7 +57,7 @@
                     android:background="@drawable/custom_edit"
                     android:drawableRight="@drawable/down"
                     android:padding="10dp"
-                    android:text="Select file to upload" />
+                    android:text="Select video to upload" />
 
 
                <!-- <RelativeLayout

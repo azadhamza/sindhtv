@@ -38,7 +38,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.it.utility.AndroidMultiPartEntity;
-import com.it.utility.EmailFetcher;
 import com.it.utility.WebServicesUrls;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -165,13 +164,13 @@ public class UserUploads extends AppCompatActivity implements View.OnClickListen
     protected void onResume() {
         super.onResume();
 
-        String name = EmailFetcher.getName(UserUploads.this);
-        String email = EmailFetcher.getEmailId(UserUploads.this);
+//        String name = EmailFetcher.getName(UserUploads.this);
+//        String email = EmailFetcher.getEmailId(UserUploads.this);
 
         init();
 
-        editNameUpload.setText(name);
-        editEmailUpload.setText(email);
+//        editNameUpload.setText(name);
+//        editEmailUpload.setText(email);
 
     }
 
@@ -209,7 +208,9 @@ public class UserUploads extends AppCompatActivity implements View.OnClickListen
 
             case R.id.btnSelectTypeFeedback:
 
-                popupWindow.showAsDropDown(v, 5, 0);
+                dialogAddVideo();
+
+//                popupWindow.showAsDropDown(v, 5, 0);
 
                 break;
 
@@ -278,58 +279,58 @@ public class UserUploads extends AppCompatActivity implements View.OnClickListen
         popupWindow.setBackgroundDrawable(getResources().getDrawable(
                 R.drawable.custom_edit));
 
-        Button btnUplaodImage = (Button) view.findViewById(R.id.btnUplaodImage);
-        Button btnUplaodVideo = (Button) view.findViewById(R.id.btnUplaodVideo);
-        Button btnUplaodRecording = (Button) view.findViewById(R.id.btnUplaodRecording);
+//        Button btnUplaodImage = (Button) view.findViewById(R.id.btnUplaodImage);
+//        Button btnUplaodVideo = (Button) view.findViewById(R.id.btnUplaodVideo);
+//        Button btnUplaodRecording = (Button) view.findViewById(R.id.btnUplaodRecording);
 
-        btnUplaodImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        btnUplaodImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                flagType = "image";
+//
+//                dialogAddImages();
+//
+//
+//                popupWindow.dismiss();
+//
+//
+//            }
+//        });
 
-                flagType = "image";
+//        btnUplaodVideo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                flagType = "video";
+//
+//                dialogAddVideo();
+//
+//                popupWindow.dismiss();
+//            }
+//        });
 
-                dialogAddImages();
-
-
-                popupWindow.dismiss();
-
-
-            }
-        });
-
-        btnUplaodVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                flagType = "video";
-
-                dialogAddVideo();
-
-                popupWindow.dismiss();
-            }
-        });
-
-        btnUplaodRecording.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                flagType = "audio";
-
-                //  dialogRecord();
-
-                Intent intent = new Intent(UserUploads.this, com.it.utility.MainActivity.class);
-                startActivityForResult(intent, ACTIVITY_RECORD_SOUND);
-
-
-                // Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
-                //  startActivityForResult(intent, ACTIVITY_RECORD_SOUND);
-
-
-                popupWindow.dismiss();
-
-
-            }
-        });
+//        btnUplaodRecording.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                flagType = "audio";
+//
+//                //  dialogRecord();
+//
+//                Intent intent = new Intent(UserUploads.this, com.it.utility.MainActivity.class);
+//                startActivityForResult(intent, ACTIVITY_RECORD_SOUND);
+//
+//
+//                // Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
+//                //  startActivityForResult(intent, ACTIVITY_RECORD_SOUND);
+//
+//
+//                popupWindow.dismiss();
+//
+//
+//            }
+//        });
 
         popupWindow.setContentView(view);
 
@@ -580,6 +581,8 @@ public class UserUploads extends AppCompatActivity implements View.OnClickListen
     }
 
     void dialogAddVideo() {
+
+        flagType = "video";
 
         final Dialog dialogDelete = new Dialog(UserUploads.this);
 
@@ -1078,22 +1081,26 @@ public class UserUploads extends AppCompatActivity implements View.OnClickListen
 
 
                 entity.addPart("name", new StringBody(java.net.URLEncoder.encode(editNameUpload.getText().toString(), "UTF-8")));
-                entity.addPart("message", new StringBody(java.net.URLEncoder.encode(editFeedbackUpload.getText().toString(), "UTF-8")));
                 entity.addPart("email", new StringBody(java.net.URLEncoder.encode(editEmailUpload.getText().toString(), "UTF-8")));
-                entity.addPart("phone", new StringBody(java.net.URLEncoder.encode(editPasswordUpload.getText().toString(), "UTF-8")));
+                entity.addPart("phone_number", new StringBody(java.net.URLEncoder.encode(editPasswordUpload.getText().toString(), "UTF-8")));
+                entity.addPart("description", new StringBody(java.net.URLEncoder.encode(editFeedbackUpload.getText().toString(), "UTF-8")));
 
-                if (flagType.equals("image")) {
-                    entity.addPart("image", new FileBody(new File(
-                            path)));
+                switch (flagType) {
+                    case "image":
+                        entity.addPart("image", new FileBody(new File(
+                                path)));
 
-                } else if (flagType.equals("video")) {
-                    entity.addPart("file", new FileBody(new File(
-                            path)));
+                        break;
+                    case "video":
+                        entity.addPart("userfile", new FileBody(new File(
+                                path)));
 
-                } else if (flagType.equals("audio")) {
-                    entity.addPart("audio", new FileBody(new File(
-                            path)));
+                        break;
+                    case "audio":
+                        entity.addPart("audio", new FileBody(new File(
+                                path)));
 
+                        break;
                 }
 
                 totalSize = entity.getContentLength();
@@ -1132,7 +1139,7 @@ public class UserUploads extends AppCompatActivity implements View.OnClickListen
                 String   type_id = jsonObject.getString("type");
                 String  msg = jsonObject.getString("response");
 
-                Toast.makeText(getApplicationContext(),msg,1000).show();
+                Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
 
                 progressBarVideoUplaod.setVisibility(View.GONE);
                 textLoading.setVisibility(View.GONE);
