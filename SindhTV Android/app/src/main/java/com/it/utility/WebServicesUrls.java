@@ -5,7 +5,7 @@ package com.it.utility;
  */
 public class WebServicesUrls {
 
-    public static String BASE_URL = "http://sindhtv.tv/index.php/api/";
+    public static String BASE_URL = "http://api.sindhtv.tv/index.php/api/";
 
     public static String GET_CHANNELS = "config/";
     public static String GET_TABS = "menu_config/";

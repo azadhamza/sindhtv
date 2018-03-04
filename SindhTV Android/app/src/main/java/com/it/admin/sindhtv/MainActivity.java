@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 ActionBar.LayoutParams.WRAP_CONTENT,
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
-        ImageView image_logo = (ImageView)mCustomView.findViewById(R.id.image_logo);
+        ImageView image_logo = (ImageView) mCustomView.findViewById(R.id.image_logo);
 
         getSupportActionBar().setCustomView(mCustomView, paramsn);
         getSupportActionBar().setCustomView(mCustomView);
@@ -199,18 +199,18 @@ public class MainActivity extends AppCompatActivity {
 
         String channel_id = shp.getString("channel_id", "");
 
-        if(channel_id.equals("2")){
+        if (channel_id.equals("2")) {
             image_logo.setBackgroundResource(R.drawable.sindhtv);
-           // actionBar.setLogo(R.drawable.sindhtv);
-        }else if(channel_id.equals("3")){
+            // actionBar.setLogo(R.drawable.sindhtv);
+        } else if (channel_id.equals("3")) {
             image_logo.setBackgroundResource(R.drawable.sindhtv_news);
             //actionBar.setLogo(R.drawable.sindhtv_news);
-        }else{
+        } else {
             image_logo.setBackgroundResource(R.drawable.jeejal);
             //actionBar.setLogo(R.drawable.jeejal);
         }
 
-       // String logoUrl = shp.getString("channel_image", "");
+        // String logoUrl = shp.getString("channel_image", "");
 
 
 
@@ -387,10 +387,10 @@ public class MainActivity extends AppCompatActivity {
                         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                         startActivity(Intent.createChooser(shareIntent, "Share images..."));*/
 
-                        Bitmap bitmap= BitmapFactory.decodeResource(getResources(),image);
-                        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+"/sindhttv.jpg";
+                        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), image);
+                        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/sindhttv.jpg";
                         OutputStream out = null;
-                        File file=new File(path);
+                        File file = new File(path);
                         try {
                             out = new FileOutputStream(file);
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
@@ -399,7 +399,7 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        path=file.getPath();
+                        path = file.getPath();
                         Uri bmpUri = Uri.fromFile(new File(path));
                         Intent shareIntent = new Intent();
                         shareIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -407,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
                         shareIntent.putExtra(Intent.EXTRA_TEXT, text);
                         shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                         shareIntent.setType("image/*");
-                        startActivity(Intent.createChooser(shareIntent,"Share with"));
+                        startActivity(Intent.createChooser(shareIntent, "Share with"));
 
                     } else if (arrMenuId.get(position).equals(12)) {
 
@@ -673,9 +673,23 @@ public class MainActivity extends AppCompatActivity {
                 String epaper = jsonobject.getString("epaper_url");
                 String about = jsonobject.getString("about_url");
                 String contact_url = jsonobject.getString("contact_url");
-                String program_url = jsonobject.getString("program_url");
+//                String program_url = jsonobject.getString("program_url");
 
-                shp.edit().putString("epaper", epaper).putString("about_url", about).putString("contact_url",contact_url).putString("program_url",program_url).commit();
+                String program_url;
+
+                switch (channelID) {
+                    case "2":
+                        program_url = "http://sindhtvnews.net/app_pages/sindhtv_program.html";
+                        break;
+                    case "3":
+                        program_url = "http://sindhtvnews.net/app_pages/news_program.html";
+                        break;
+                    default:
+                        program_url = "http://sindhtvnews.net/app_pages/sindhtv_program.html";
+                        break;
+                }
+
+                shp.edit().putString("epaper", epaper).putString("about_url", about).putString("contact_url", contact_url).putString("program_url", program_url).commit();
 
                 JSONArray jsonArrayMian = jsonobject.getJSONArray("items");
 
@@ -727,8 +741,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-
-
 
 
             mDrawerList.setAdapter(new CustomAdapter());

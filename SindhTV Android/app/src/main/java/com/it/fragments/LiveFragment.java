@@ -18,7 +18,6 @@ import com.it.admin.sindhtv.R;
 import com.it.utility.ServiceHandler;
 import com.it.utility.WebServicesUrls;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -70,8 +69,10 @@ public class LiveFragment extends Fragment {
           topLayoutLive = (LinearLayout) fakeHeader.findViewById(R.id.topLayoutLive);
         if(channelID.equals("3") || channelID.equals("1")){
             topLayoutLive.setBackgroundResource(R.drawable.gray_bg);
+            imageWatchLive.setBackgroundResource(R.drawable.watch_live_news);
         }else{
             topLayoutLive.setBackgroundResource(R.drawable.orange_bg);
+            imageWatchLive.setBackgroundResource(R.drawable.watch_live_tv);
         }
         
        /* Picasso.with(getActivity()).load(bg).into(new Target() {
