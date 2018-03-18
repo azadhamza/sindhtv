@@ -134,9 +134,8 @@ public class MainActivity extends AppCompatActivity {
         if (isInternetPresent) {
 
         } else {
-            Toast.makeText(getApplicationContext(),
-                    "No Internet Connection Found!", Toast.LENGTH_SHORT).show();
-            finish();
+            Toast.makeText(getApplicationContext(), R.string.no_internet_msg, Toast.LENGTH_LONG).show();
+//            finish();
         }
 
 
@@ -162,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         tabTextColor = shp.getString("tabtext_color", "");
         listTextColor = shp.getString("listtext_color", "");
 
-        String banner_code_ios = shp.getString("banner_code_ios", "");
+/*        String banner_code_ios = shp.getString("banner_code_ios", "");
 
         android.widget.LinearLayout adContainer = (android.widget.LinearLayout) findViewById(R.id.layoutAdsMain);
         AdView adView = new AdView(MainActivity.this);
@@ -175,18 +174,18 @@ public class MainActivity extends AppCompatActivity {
         adView.loadAd(adRequest);
 
         android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.MATCH_PARENT);
-        adContainer.addView(adView, params);
+        adContainer.addView(adView, params);*/
 
 
         init();
 
 
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(actionbarColor)));
-        actionBar.setDisplayShowTitleEnabled(false);
-
-
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+        if (actionBar != null) {
+            actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(actionbarColor)));
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayUseLogoEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
 
         // Getting reference to the DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

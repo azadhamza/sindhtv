@@ -20,6 +20,7 @@ public class ContactUsActivity extends android.support.v7.app.AppCompatActivity{
         String url_webview = shp.getString("contact_url","");
         String  actionbarColor = shp.getString("actionbar_color", "");
 
+/*
         String banner_code_ios = shp.getString("banner_code_ios", "");
 
         android.widget.LinearLayout adContainer = (android.widget.LinearLayout)findViewById(com.it.admin.sindhtv.R.id.linearAdAbout);
@@ -34,6 +35,7 @@ public class ContactUsActivity extends android.support.v7.app.AppCompatActivity{
 
         android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.MATCH_PARENT);
         adContainer.addView(adView, params);
+*/
 
 
         getSupportActionBar().setTitle("Contact us");

@@ -124,8 +124,8 @@ public class AllChannels extends AppCompatActivity {
         });
 
         } else {
-            Toast.makeText(AllChannels.this,"No Internet Connection Found!",Toast.LENGTH_SHORT).show();
-            finish();
+            Toast.makeText(AllChannels.this, R.string.no_internet_msg, Toast.LENGTH_LONG).show();
+//            finish();
         }
 
 
@@ -255,7 +255,7 @@ public class AllChannels extends AppCompatActivity {
 
             gridAllChannels.setAdapter(new CustomChannelsAdapter());
 */
-            String banner_code_ios = shp.getString("banner_code_ios","");
+/*            String banner_code_ios = shp.getString("banner_code_ios","");
 
             android.widget.LinearLayout adContainer = (android.widget.LinearLayout)findViewById(com.it.admin.sindhtv.R.id.linearAdAllChannels);
             com.google.android.gms.ads.AdView adView = new com.google.android.gms.ads.AdView(com.it.admin.sindhtv.AllChannels.this);
@@ -268,7 +268,7 @@ public class AllChannels extends AppCompatActivity {
             adView.loadAd(adRequest);
 
             android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.MATCH_PARENT);
-            adContainer.addView(adView, params);
+            adContainer.addView(adView, params);*/
 
         }
     }
